@@ -7,7 +7,7 @@ import Workshops from "./pages/Workshops";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Hackathon from "./pages/Hackathon";
 import About from "./pages/About";
-import Sponsors from "./pages/sponsors";
+import Sponsors from "./pages/Sponsors";
 import Contact from "./pages/Contact";
 import Dev from "./pages/Dev";
 import WorkshopExplore from "./pages/WorkshopExplore";
