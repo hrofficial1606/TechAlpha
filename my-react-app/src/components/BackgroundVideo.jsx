@@ -1,4 +1,5 @@
 import React from "react";
+import video from "../assets/BgVideo.mp4"
 
 function BackgroundVideo()
 {
@@ -6,7 +7,7 @@ function BackgroundVideo()
     <div className="video-container">
       <video autoPlay muted loop playsInline className="bg-video">
         <source
-          src="../public/video/BgVideo.mp4"
+          src={video}
           type="video/mp4"
         />
       </video>

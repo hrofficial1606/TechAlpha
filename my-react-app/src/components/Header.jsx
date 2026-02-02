@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import logo from "../assets/logoTechAlpha.png"
 
 function Header() {
   return (
@@ -6,7 +7,7 @@ function Header() {
 
       {/* LEFT LOGO */}
       <div className="logo">
-        <span className="logo-span"><img src="../public/Image/logoTechAlpha.png" alt="" className="logoimg" /></span>
+        <span className="logo-span"><img src={logo} alt="" className="logoimg" /></span>
       </div>
 
       {/* CENTER MENU */}
