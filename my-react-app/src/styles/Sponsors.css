@@ -1,0 +1,146 @@
+/* ===============================
+   BACKGROUND SECTION
+================================ */
+
+.sponsors-section {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at top, rgba(58, 10, 106, 0.3), rgba(21, 0, 38, 0.9)),
+    url("../assets/sponsors.png");
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top center;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 500px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 200px;
+  
+}
+
+
+/* ===============================
+   GLASS CARD
+================================ */
+
+.sponsors-card {
+  width: 80%;
+  max-width: 900px;
+  margin-top: 200px;
+
+  background: rgba(110, 0, 200, 0.90);
+  border: 1px solid rgba(180, 100, 255, 0.4);
+
+  /* TOP padding reduced */
+  padding: 10px 22px 18px 22px;
+
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.4;
+
+  box-shadow:
+    0 0 15px rgba(170, 0, 255, 0.5),
+    0 0 30px rgba(170, 0, 255, 0.3);
+
+  transition: 0.4s ease;
+}
+
+
+/* ===============================
+   NEON HOVER EFFECT
+================================ */
+
+.sponsors-card:hover {
+  box-shadow:
+    0 0 25px rgba(200, 0, 255, 0.8),
+    0 0 50px rgba(200, 0, 255, 0.6),
+    0 0 80px rgba(200, 0, 255, 0.4);
+
+  transform: scale(1.02);
+}
+
+
+/* ===============================
+   SPONSOR LOGO
+================================ */
+
+.sponsor-logo {
+  width: 180px;
+
+  margin-top: 0;        /* IMPORTANT */
+  margin-bottom: 8px;  /* Smaller gap */
+
+  filter: drop-shadow(0 0 12px #9d00ff);
+}
+
+
+
+/* ===============================
+   FLOATING ANIMATION
+================================ */
+
+.floating-card {
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+/* ===============================
+   SCROLL REVEAL
+================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+  .sponsors-section {
+    padding-top: 300px;
+  }
+
+  .sponsors-card {
+    width: 95%;
+    padding: 18px;
+    font-size: 14px;
+  }
+
+  .sponsor-logo {
+    width: 150px;
+  }
+
+}

@@ -1,0 +1,184 @@
+/* ===============================
+   CONTACT SECTION BACKGROUND
+================================ */
+
+.contact-section {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at top, rgba(58, 10, 106, 0.3), rgba(21, 0, 38, 0.9)),
+    url("../assets/contact.png");
+
+  background-size: 1100px auto;
+  background-repeat: no-repeat;
+  background-position:top center;
+  
+  background-attachment: scroll;
+  background-color: rgba(58, 10, 106,0.3);
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 300px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 200px;
+}
+
+
+/* ===============================
+   CONTACT GLASS CARD
+================================ */
+
+.contact-card {
+  width: 80%;
+  max-width: 600px;
+   margin-top: 700px;
+  background: rgba(110, 0, 200, 0.25);
+  border: 1px solid rgba(180, 100, 255, 0.4);
+
+  padding: 12px 22px 18px 22px;
+
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+
+  text-align: center;
+
+  box-shadow:
+    0 0 15px rgba(170, 0, 255, 0.5),
+    0 0 30px rgba(170, 0, 255, 0.3);
+
+  transition: 0.4s ease;
+}
+
+
+/* ===============================
+   NEON HOVER EFFECT
+================================ */
+
+.contact-card:hover {
+  box-shadow:
+    0 0 25px rgba(200, 0, 255, 0.8),
+    0 0 50px rgba(200, 0, 255, 0.6),
+    0 0 80px rgba(200, 0, 255, 0.4);
+
+  transform: scale(1.02);
+}
+
+
+/* ===============================
+   CONTACT BOX STYLE
+================================ */
+
+.contact-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+  margin: 20px;
+
+  padding: 10px 0;
+
+  font-size: 16px;
+  color: white;
+
+  width: 80%;
+  max-width: 600px;
+
+  background: rgba(110, 0, 200, 0.25);
+  border: 1px solid rgba(180, 100, 255, 0.4);
+
+  padding: 12px 22px 18px 22px;
+
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+
+  text-align: center;
+
+  box-shadow:
+    0 0 15px rgba(170, 0, 255, 0.5),
+    0 0 30px rgba(170, 0, 255, 0.3);
+
+  transition: 0.4s ease;
+
+}
+
+
+/* ===============================
+   ICON STYLE
+================================ */
+
+.contact-link {
+  color: #c77dff;
+  font-size: 22px;
+
+  transition: 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #ffffff;
+  transform: scale(1.2);
+}
+
+
+/* ===============================
+   FLOATING ANIMATION
+================================ */
+
+.floating-card {
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+/* ===============================
+   SCROLL REVEAL
+================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+  .contact-section {
+    padding-top: 300px;
+  }
+
+  .contact-card {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .contact-box {
+    font-size: 14px;
+  }
+
+}

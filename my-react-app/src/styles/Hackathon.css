@@ -1,0 +1,323 @@
+/* ===============================
+   HERO BACKGROUND SECTION
+================================ */
+
+.hero-section {
+
+  background-size: 250vh 150vh;
+  height: 100vh;
+  background-position: top;
+  background-repeat: no-repeat;
+
+  display:block;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  
+}
+
+
+/* DARK OVERLAY FOR TEXT READABILITY */
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.30),
+    rgba(10, 0, 25, 0.30)
+  );
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  
+}
+
+
+/* HERO TEXT */
+
+.hero-title {
+  font-size: 60px;
+  letter-spacing: 4px;
+
+  color: #fff;
+
+  text-shadow:
+    0 0 20px #a100ff,
+    0 0 40px #a100ff;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  margin-top: 10px;
+
+  color: #ddd;
+}
+
+
+
+
+/* ===============================
+   GLOBAL BACKGROUND
+================================ */
+
+.app-container {
+  background: radial-gradient(circle at top, #3a0a6a, #150026);
+  color: white;
+}
+
+
+
+
+/* ===============================
+   SECTION STYLE
+================================ */
+
+.section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 42px;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+
+  text-shadow:
+    0 0 10px #a100ff,
+    0 0 20px #a100ff;
+}
+
+
+/* ===============================
+   GLASS CARD
+================================ */
+
+.glass-card {
+  width: 80%;
+  max-width: 900px;
+  margin: auto;
+
+  background: rgba(110, 0, 200, 0.25);
+  border: 1px solid rgba(180, 100, 255, 0.4);
+
+  padding: 18px 22px;
+
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+
+  font-size: 15px;
+  line-height: 1.4;
+
+  box-shadow:
+    0 0 15px rgba(170, 0, 255, 0.5),
+    0 0 30px rgba(170, 0, 255, 0.3);
+
+  transition: 0.4s ease;
+}
+
+.glass-card:hover {
+  box-shadow:
+    0 0 25px rgba(200, 0, 255, 0.8),
+    0 0 50px rgba(200, 0, 255, 0.6),
+    0 0 80px rgba(200, 0, 255, 0.4);
+
+  transform: scale(1.02);
+}
+
+
+/* ===============================
+   IMAGE SECTION
+================================ */
+
+.img-div {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.card-img {
+  width: 200px;
+  filter: drop-shadow(0 0 15px #9d00ff);
+}
+
+.card-img1 {
+  width: 300px;
+  filter: drop-shadow(0 0 15px #9d00ff);
+}
+
+
+/* ===============================
+   CONTACT GRID
+================================ */
+
+.hackathon-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: auto;
+  
+}
+
+.hackathon-contact-card {
+  background: rgba(110, 0, 200, 0.25);
+  border-radius: 15px;
+  padding: 20px;
+
+  box-shadow: 0 0 20px rgba(160, 0, 255, 0.4);
+}
+
+
+/* ===============================
+   FLOATING ANIMATION
+================================ */
+
+.floating-card {
+  animation: floatCard 6s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+
+/* ===============================
+   SCROLL REVEAL
+================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ===============================
+   FOOTER
+================================ */
+
+footer {
+  padding: 50px 20px;
+  background: #0b0015;
+}
+
+.section-footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .glass-card {
+    width: 95%;
+  }
+
+  .card-img1 {
+    width: 220px;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .hero-title {
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+}
+
+/* ===============================
+   QR REGISTER SECTION
+================================ */
+
+.qr-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 30px;
+
+  padding: 25px;
+
+  max-width: 700px;
+  margin: auto;
+}
+
+.qr-img {
+  width: 160px;
+  height: 160px;
+
+  border-radius: 12px;
+
+  background: white;
+  padding: 8px;
+
+  box-shadow:
+    0 0 20px rgba(160, 0, 255, 0.6);
+}
+
+.qr-text h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+
+  color: #c77dff;
+}
+
+.qr-text p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.qr-note {
+  color: #ffccff;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+
+/* ===============================
+   MOBILE QR FIX
+================================ */
+
+@media (max-width: 768px) {
+
+  .qr-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .qr-img {
+    width: 140px;
+    height: 140px;
+  }
+
+}
