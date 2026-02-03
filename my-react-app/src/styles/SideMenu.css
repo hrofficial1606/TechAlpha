@@ -1,0 +1,152 @@
+/* ================= DESKTOP SIDE MENU (UNCHANGED) ================= */
+
+.side-menu {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 80px;
+  height: 55vh;
+
+  /* BLACK GLASS EFFECT */
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-radius: 22px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* SOFT WHITE GLOW */
+  box-shadow:
+    0 0 15px rgba(255, 255, 255, 0.15),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+
+  z-index: 1000;
+}
+
+/* BORDER GLOW */
+
+.side-menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: 22px;
+
+  background: linear-gradient(180deg, #ffffff, #888888);
+
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* MENU LIST */
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+/* ITEMS */
+
+.side-menu li {
+  text-align: center;
+}
+
+/* LINKS */
+
+.side-menu a {
+  text-decoration: none;
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+
+  transition: 0.3s ease;
+}
+
+/* ICON */
+
+.side-menu a svg {
+  font-size: 22px;
+  margin-bottom: 5px;
+  filter: drop-shadow(0 0 4px white);
+}
+
+/* HOVER */
+
+.side-menu a:hover {
+  transform: scale(1.1);
+  color: #e0e0e0;
+}
+
+/* ACTIVE */
+
+.side-menu a.active {
+  color: #ffffff;
+  text-shadow: 0 0 8px white;
+}
+
+
+/* ================================================= */
+/* ================= MOBILE VIEW ================= */
+/* ================================================= */
+
+
+@media (max-width: 768px) {
+
+  .side-menu {
+    left: 50%;
+    top: auto;
+    bottom: 12px;
+
+    transform: translateX(-50%);
+
+    width: 92%;
+    height: 70px;
+
+    border-radius: 20px;
+
+    padding: 0 10px;
+  }
+
+  /* HORIZONTAL MENU */
+
+  .side-menu ul {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 0;
+    width: 100%;
+  }
+
+  /* TEXT SMALLER */
+
+  .side-menu a {
+    font-size: 10px;
+  }
+
+  /* ICON SIZE */
+
+  .side-menu a svg {
+    font-size: 20px;
+    margin-bottom: 3px;
+  }
+
+}

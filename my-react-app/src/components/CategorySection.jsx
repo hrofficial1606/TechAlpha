@@ -1,4 +1,5 @@
 import FuturisticCard from "./FuturisticCard";
+import "../styles/Workshop.css";
 
 function CategorySection({ title, data = [] }) {
 

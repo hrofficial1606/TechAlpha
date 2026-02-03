@@ -1,0 +1,179 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: #0b0b18;
+}
+
+/* ================= TOP HEADER ================= */
+
+.top-header {
+  height: 90px;
+  padding: 0 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: linear-gradient(90deg, #05051a, #0c0c2b, #05051a);
+
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+}
+
+/* ================= LOGO ================= */
+
+.logo {
+  height: 80px;
+  width: 138px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-left: -1px;
+}
+
+.logo-span {
+  height: 80px;
+  width: 138px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  margin-left: 0px;
+}
+
+.logoimg {
+  height: 80px;
+  width: 138px;
+  margin-top: 0px;
+  margin-left: 0px;
+}
+
+/* ================= CENTER MENU ================= */
+
+.nav-links {
+  display: flex;
+  gap: 60px;
+}
+
+.nav-links a {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* UNDERLINE EFFECT */
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #7c3aed;
+  left: 0;
+  bottom: -6px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #c77dff;
+}
+
+/* ================= SIGNIN BUTTON ================= */
+
+.signin-btn {
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  border: none;
+
+  padding: 10px 20px;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  font-weight: 300;
+
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+
+  color: white;
+  border-radius: 30px 30px 10px 10px;
+  cursor: pointer;
+
+  box-shadow: 0 0 15px #7c3aed;
+  transition: 0.3s;
+}
+
+/* ================= SIGNUP BUTTON ================= */
+
+.signup-btn {
+  background: #7c3aed;
+  border: none;
+
+  padding: 5px 8px;
+  font-size: 10px;
+  font-family: 'ABeeZee', sans-serif;
+
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+
+  box-shadow: 0 0 12px #7c3aed;
+  transition: 0.3s;
+}
+
+/* ================================================= */
+/* ================= MOBILE VIEW ================= */
+/* ================================================= */
+@media (max-width: 768px) {
+
+  /* HEADER MORE COMPACT */
+  .top-header {
+    height: auto;
+    padding: 4px 10px;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* SMALLER LOGO */
+  .logo,
+  .logoimg,
+  .logo-span {
+    height: 45px;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  /* NAV LINKS TIGHT */
+  .nav-links {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    letter-spacing: 0.4px;
+  }
+
+  /* BUTTON SMALL */
+  .signin-btn {
+    width: 100%;
+    font-size: 13px;
+    padding: 5px 0;
+    border-radius: 14px;
+  }
+
+  .signup-btn {
+    width: 100%;
+    font-size: 10px;
+    padding: 4px 0;
+  }
+
+}
+

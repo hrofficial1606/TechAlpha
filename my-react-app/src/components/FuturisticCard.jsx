@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "../styles/Workshop.css";
 
 function FuturisticCard({ title, image, price, oldPrice, tag, status,pdf }) {
 

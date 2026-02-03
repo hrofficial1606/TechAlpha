@@ -223,37 +223,7 @@ footer {
 }
 
 
-/* ===============================
-   MOBILE RESPONSIVE
-================================ */
 
-@media (max-width: 768px) {
-
-  .section-title {
-    font-size: 28px;
-  }
-
-  .glass-card {
-    width: 95%;
-  }
-
-  .card-img1 {
-    width: 220px;
-  }
-
-}
-@media (max-width: 768px) {
-
-  .hero-title {
-    font-size: 32px;
-    letter-spacing: 2px;
-  }
-
-  .hero-subtitle {
-    font-size: 14px;
-  }
-
-}
 
 /* ===============================
    QR REGISTER SECTION
@@ -304,20 +274,98 @@ footer {
 }
 
 
-/* ===============================
-   MOBILE QR FIX
-================================ */
+/* ================= MOBILE SIZE & FIT FIX ================= */
 
 @media (max-width: 768px) {
 
+  /* ===== HERO SECTION FIX ===== */
+
+  .hero-section {
+    height: auto;              /* Remove fixed 100vh */
+    min-height: 100vh;
+    background-size: cover;    /* Proper background fit */
+    background-position: center;
+    padding: 40px 10px;
+  }
+
+  .hero-overlay {
+    padding: 30px 10px;
+  }
+
+  .hero-title {
+    font-size: 30px;
+    letter-spacing: 1.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  /* ===== SECTION FIX ===== */
+
+  .section {
+    padding: 50px 12px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+  /* ===== GLASS CARD FIX ===== */
+
+  .glass-card {
+    width: 95%;
+    font-size: 14px;
+    padding: 15px;
+  }
+
+  /* ===== IMAGE FIX ===== */
+
+  .img-div {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-img {
+    width: 160px;
+  }
+
+  .card-img1 {
+    width: 200px;
+  }
+
+  /* ===== CONTACT GRID FIX ===== */
+
+  .hackathon-contact-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  /* ===== FOOTER FIX ===== */
+
+  footer {
+    padding: 35px 12px;
+  }
+
+  /* ===== QR SECTION FIX ===== */
+
   .qr-container {
     flex-direction: column;
-    text-align: center;
+    gap: 15px;
+    padding: 15px;
   }
 
   .qr-img {
-    width: 140px;
-    height: 140px;
+    width: 130px;
+    height: 130px;
+  }
+
+  .qr-text h3 {
+    font-size: 18px;
+  }
+
+  .qr-text p {
+    font-size: 13px;
   }
 
 }

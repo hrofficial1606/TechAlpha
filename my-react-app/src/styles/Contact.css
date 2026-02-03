@@ -161,23 +161,36 @@
   transform: translateY(0);
 }
 
-
-/* ===============================
-   MOBILE RESPONSIVE
-================================ */
+/* ================= MOBILE ================= */
 
 @media (max-width: 768px) {
 
+  /* Make background behave like top banner */
+
   .contact-section {
-    padding-top: 300px;
+    min-height: auto;
+    padding-top: 220px;     /* space for bg image */
+    padding-bottom: 80px;
+
+    align-items: flex-start;
+
+    background-size: contain;   /* show full bg image */
+    background-position: top center;
   }
 
+  /* Place card just after background */
+
   .contact-card {
+    margin-top: 20px;      /* card comes after bg */
     width: 95%;
     padding: 16px;
   }
 
+  /* Contact boxes spacing */
+
   .contact-box {
+    width: 95%;
+    margin: 10px auto;
     font-size: 14px;
   }
 

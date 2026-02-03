@@ -1,0 +1,323 @@
+
+.main-title {
+  text-align: center;
+  font-size: 18px;
+  margin: 40px 0;
+  color: #c77dff;
+  text-shadow: 0 0 10px #a855f7, 0 0 20px #7c3aed;
+}
+
+
+
+
+.f-card {
+  width: 200px;
+  height: 360px;
+  background: linear-gradient(180deg,#0b001a,#140033);
+  position: relative;
+  padding: 12px;
+  border: 2px solid #7c3aed;
+  box-shadow: 0 0 25px #7c3aed;
+  clip-path: polygon(
+    0% 6%,
+    8% 0%,
+    92% 0%,
+    100% 6%,
+    100% 94%,
+    92% 100%,
+    8% 100%,
+    0% 94%
+  );
+  transition: 0.4s;
+}
+
+.f-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 40px #c77dff;
+}
+
+/* Vertical Workshop Tag */
+
+.f-tag {
+  position: absolute;
+  left: -28px;
+  top: 40px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 4px 6px;
+  font-size: 12px;
+  background: transparent;
+  border: 1px solid #7c3aed;
+  color: white;
+  letter-spacing: 2px;
+}
+
+/* Title */
+
+.f-title {
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+/* Image Section */
+
+.f-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.f-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Buttons */
+
+.f-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.register-btn {
+  background: transparent;
+  border: 3px solid #7c3aed;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #7c3aed;
+}
+
+.explore-btn {
+  background: transparent;
+  border: 3px solid #7c3aed;
+  color: white;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* Price Ribbon */
+
+.f-price {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width:80%;
+  padding: 8px;
+  background: linear-gradient(90deg,#7c3aed,#5b21b6);
+  text-align: center;
+  font-size: 12px;
+}
+
+.f-price span {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.f-price del {
+  color: red;
+  margin-left: 5px;
+}
+
+
+.signin-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #2f2537;
+}
+
+
+.highlights {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  font-size: 15px;
+  
+}
+
+.highlights div {
+  background: linear-gradient(145deg,#2a004f,#12001f);
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #7c3aed;
+  transition: 0.3s;
+}
+
+.highlights div:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #c77dff;
+}
+.card-grid {
+  display: flex;
+  justify-content: center;
+  grid-template-columns: repea t(3, 10px);
+  gap: 50px;
+  
+  padding: 20px 40px;
+  margin-left: 200px;
+  margin-left: 200px;
+  
+}
+
+.card {
+  background: #0f0f1f;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 15px #7c3aed55;
+  transition: 0.4s;
+  animation: fadeIn 1s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 30px #7c3aed;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.btn-group button {
+  background: transparent;
+  border: 1px solid #7c3aed;
+  color: white;
+  padding: 7px 12px;
+  margin: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-group button:hover {
+  background: #7c3aed;
+  box-shadow: 0 0 10px #7c3aed;
+}
+.category-title {
+  text-align: center;
+  margin: 50px 0 20px;
+  padding: 10px;
+  background: linear-gradient(to right, transparent, #7c3aed, transparent);
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+/* ================= MOBILE VIEW  ================= */
+
+
+@media (max-width: 768px) {
+
+  /* TITLE */
+
+  .main-title {
+    font-size: 16px;
+    margin: 20px 0;
+  }
+
+  /* ================= FEATURE CARD ================= */
+
+  .f-card {
+    width: 90%;
+    height: auto;               /* allow content to expand */
+    min-height: 430px;          /* enough space for image + buttons */
+    margin: 0 auto 25px;
+    padding-bottom: 20px;
+  }
+
+  /* IMAGE FIX */
+
+  .f-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+
+  .f-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;        /* image fully visible */
+  }
+
+  /* TAG ADJUST */
+
+  .f-tag {
+    left: -22px;
+    font-size: 10px;
+  }
+
+  /* ================= BUTTON FIX ================= */
+
+  .f-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+  }
+
+  .register-btn,
+  .explore-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* ================= PRICE FIX ================= */
+
+  .f-price {
+    position: relative;         /* prevent overlap */
+    width: 100%;
+    margin-top: 12px;
+    font-size: 11px;
+  }
+
+  /* ================= HIGHLIGHTS ================= */
+
+  .highlights {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 15px;
+    font-size: 14px;
+  }
+
+  /* ================= CARD GRID ================= */
+
+  .card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 10px;
+    margin-left: 0;
+  }
+
+  /* NORMAL CARD */
+
+  .card {
+    width: 100%;
+  }
+
+  /* ================= CATEGORY TITLE ================= */
+
+  .category-title {
+    font-size: 14px;
+    margin: 30px 0 15px;
+  }
+
+  /* ================= BUTTON GROUP ================= */
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .btn-group button {
+    width: 100%;
+  }
+
+}
+

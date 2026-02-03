@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaHome, FaShoppingCart, FaInfoCircle, FaPhone, FaHandshake } from "react-icons/fa";
+import "../styles/SideMenu.css";
 
 function SideMenu() {
   return (

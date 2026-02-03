@@ -10,6 +10,7 @@ import react from "../assets/React.pdf"
 import da  from "../assets/DataAnalytics.pdf"
 import aiml  from "../assets/aiml.pdf"
 import python  from "../assets/python.pdf"
+import "../styles/Workshop.css";
 
 
 
