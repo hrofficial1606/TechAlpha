@@ -48,12 +48,12 @@ function Contact() {
 
           <div className="contact-box">
             <NavLink
-              to="mailto:info@techalpha.in"
+              to="mailto:info@techalpha.org"
               className="contact-link"
             >
               <FaMailBulk />
            
-            <span>info@techalpha.in</span>
+            <span>info@techalpha.org</span>
              </NavLink>
           </div>
 
