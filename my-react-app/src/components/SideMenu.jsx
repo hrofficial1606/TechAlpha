@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 import { FaHome, FaShoppingCart, FaInfoCircle, FaPhone, FaHandshake } from "react-icons/fa";
 import "../styles/SideMenu.css";
 
+import { FaInstagram, FaWhatsapp,FaLinkedin } from "react-icons/fa";
+
+
 function SideMenu() {
   return (
     <div className="side-menu">
@@ -37,8 +40,44 @@ function SideMenu() {
             <FaShoppingCart /> Shop
           </NavLink>
         </li>
+        {/* MOBILE SOCIAL LINKS */}
+
+<li className="mobile-social">
+  <a
+    href="https://www.instagram.com/widesoftech?igsh=MTl6OGg4NzZ6N3pnNQ=="
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaInstagram />
+    Instagram
+  </a>
+</li>
+
+<li className="mobile-social">
+  <a
+    href="https://www.linkedin.com/company/widesoftech-pvt-ltd/"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaLinkedin />
+    LinkedIn
+  </a>
+</li>
+
+<li className="mobile-social">
+  <a
+    href="https://whatsapp.com/channel/0029Vb6spJsDTkJxQfxia02s"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaWhatsapp />
+    WhatsApp
+  </a>
+</li>
+
 
       </ul>
+      
     </div>
   );
 }
