@@ -280,13 +280,18 @@ footer {
 
   /* ===== HERO SECTION FIX ===== */
 
-  .hero-section {
-    height: auto;              /* Remove fixed 100vh */
-    min-height: 100vh;
-    background-size: cover;    /* Proper background fit */
-    background-position: center;
-    padding: 40px 10px;
-  }
+ .hero-section {
+  height: auto;
+  min-height: 70vh;             /* Banner style height */
+
+  background-size: contain;    /* SHOW FULL BANNER */
+  background-repeat: no-repeat;
+  background-position: top center;
+
+  padding-top: 220px;          /* Space for banner image */
+  /*padding-bottom: 40px;*/
+}
+
 
   .hero-overlay {
     padding: 30px 10px;
@@ -367,5 +372,10 @@ footer {
   .qr-text p {
     font-size: 13px;
   }
+  .hero-overlay {
+  justify-content: flex-end;
+  padding-bottom: 30px;
+}
+
 
 }
