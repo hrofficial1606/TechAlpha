@@ -11,6 +11,7 @@ import Sponsors from "./pages/Sponsors";
 import Contact from "./pages/Contact";
 import Dev from "./pages/Dev";
 import WorkshopExplore from "./pages/WorkshopExplore";
+import Accommodation from "./pages/Accommodation";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -32,7 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
          <Route path="/sponsors" element={<Sponsors />} />
          <Route path="/contact" element={<Contact />} />
           <Route path="/dev" element={<Dev />} />
-          
+          <Route path="/acm" element={<Accommodation />} />
           <Route path="/workshops/explore" element={<WorkshopExplore />} />
         
 

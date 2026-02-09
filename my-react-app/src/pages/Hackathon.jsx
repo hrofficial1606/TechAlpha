@@ -14,6 +14,9 @@ import { NavLink } from "react-router-dom";
 
 import { FaMailBulk } from "react-icons/fa";
 import { FaLocationPin, FaPhone } from "react-icons/fa6";
+import Timeline from "../components/Timeline";
+import Countdown from "../components/Countdown";
+import Prizes from "../components/Prizes";
 function Hackathon() {
      
     
@@ -57,11 +60,13 @@ function Hackathon() {
     <h1 className="hero-title">TECHALPHA HACKATHON 2026</h1>
     <p className="hero-subtitle">
       From Innovation To Execution 🚀
+        <Countdown/>
     </p>
   </div>
+
 </div>
 
-
+      
       {/* ABOUT */}
       <section className="section">
 
@@ -84,6 +89,7 @@ function Hackathon() {
         </div>
 
       </section>
+           <Prizes/>
 
       {/* CONTACT */}
       <section className="section">
@@ -134,9 +140,8 @@ function Hackathon() {
         </div>
 
       </section>
-
-
-
+           <div className="section-title reveal">tIME LINE</div>
+    <Timeline/>
 
       {/* SPONSORS */}
       <section className="section">
@@ -253,10 +258,11 @@ function Hackathon() {
       <p className="qr-note">
         Limited seats available 🚀
       </p>
+       
     </div>
-
+         
   </div>
-
+        <Countdown/>
 </section>
 
 

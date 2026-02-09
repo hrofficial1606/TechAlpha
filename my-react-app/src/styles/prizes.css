@@ -1,0 +1,111 @@
+.prizes-section {
+  text-align: center;
+  padding: 80px 20px;
+  color: white;
+}
+
+/* Title */
+
+.prizes-title {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.prizes-subtitle {
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+/* Total Prize */
+
+.total-prize {
+  font-size: 42px;
+  font-weight: bold;
+  background: linear-gradient(90deg,#ffcc00,#ffaa00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.total-label {
+  margin-bottom: 50px;
+  opacity: 0.8;
+}
+
+/* Cards Container */
+
+.prize-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Card Base */
+
+.prize-card {
+  width: 300px;
+  padding: 30px;
+  border-radius: 18px;
+
+  backdrop-filter: blur(12px);
+  background: rgba(30, 20, 60, 0.4);
+
+  transition: 0.3s ease;
+  position: relative;
+}
+
+/* Hover Glow */
+
+.prize-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 30px rgba(255,255,255,0.15);
+}
+
+/* Amount Row */
+
+.amount-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 26px;
+  margin: 15px 0;
+}
+
+.emoji {
+  font-size: 28px;
+}
+
+.amount {
+  font-weight: bold;
+}
+
+/* Winner Placeholder */
+
+.winner-placeholder {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Gradient Borders */
+
+.gold {
+  border: 2px solid #ffcc00;
+  box-shadow: 0 0 20px rgba(255,204,0,0.3);
+}
+
+.silver {
+  border: 2px solid #c0c0c0;
+  box-shadow: 0 0 20px rgba(200,200,200,0.3);
+}
+
+.bronze {
+  border: 2px solid #cd7f32;
+  box-shadow: 0 0 20px rgba(205,127,50,0.3);
+}
+

@@ -34,7 +34,7 @@ function Header() {
 
       {/* CENTER MENU */}
       <div className="nav-links">
-         <NavLink to="/dev">ACCOMMODATION</NavLink>
+         <NavLink to="/acm">ACCOMMODATION</NavLink>
         <NavLink to="/workshops">WORKSHOPS</NavLink>
       <NavLink to="/hackthons">HACKATHON</NavLink>
       </div>
@@ -42,7 +42,7 @@ function Header() {
               {/* CENTER MENU */}
       <div className="nav-btn">
          <NavLink to="/"> <FaHome />Home </NavLink>
-         <NavLink to="/dev"><FaBuilding /> ACCOMMODATION</NavLink>
+         <NavLink to="/acm"><FaBuilding /> ACCOMMODATION</NavLink>
         <NavLink to="/workshops"><GrWorkshop /> WORKSHOPS</NavLink>
       <NavLink to="/hackthons"><GiTrophy /> HACKATHON</NavLink>
       </div>
