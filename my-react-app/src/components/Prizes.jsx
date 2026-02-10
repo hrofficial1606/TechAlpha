@@ -18,6 +18,7 @@ export default function Prizes() {
           title="Winner"
           amount="₹21,000"
           emoji="🏆"
+          tba="Free InternShip "
           border="gold"
         />
 
@@ -25,6 +26,7 @@ export default function Prizes() {
           title="Runner Up"
           amount="₹11,000"
           emoji="🥈"
+          tba =""
           border="silver"
         />
 
@@ -35,7 +37,7 @@ export default function Prizes() {
   );
 }
 
-function PrizeCard({ title, amount, emoji, border }) {
+function PrizeCard({ title, amount, emoji, tba ,border }) {
   return (
     <div className={`prize-card ${border}`}>
       <h3>{title}</h3>
@@ -44,7 +46,7 @@ function PrizeCard({ title, amount, emoji, border }) {
         <span className="amount">{amount}</span>
       </div>
 
-      <div className="winner-placeholder">Winner TBA</div>
+      <div className="winner-placeholder">Winner TBA <br /><span>{tba}</span></div>
     </div>
   );
 }
