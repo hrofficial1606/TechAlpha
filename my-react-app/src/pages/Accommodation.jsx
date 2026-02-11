@@ -12,15 +12,20 @@ const Accommodation = () => {
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal");
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-        }
-      });
-    }, { threshold: 0.15 });
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
     elements.forEach(el => observer.observe(el));
+
+    return () => observer.disconnect();
   }, []);
 
   /* Mouse glow */
@@ -28,10 +33,9 @@ const Accommodation = () => {
     const glow = document.querySelector(".mouse-glow");
 
     const moveGlow = (e) => {
-      if (glow) {
-        glow.style.left = e.clientX + "px";
-        glow.style.top = e.clientY + "px";
-      }
+      if (!glow) return;
+      glow.style.left = e.clientX + "px";
+      glow.style.top = e.clientY + "px";
     };
 
     window.addEventListener("mousemove", moveGlow);
@@ -40,40 +44,43 @@ const Accommodation = () => {
 
   return (
     <div>
-      <Header/>
-      <SideMenu/>
-      <RightSideMenu/>
+      <Header />
+      <SideMenu />
+      <RightSideMenu />
 
       {/* Effects */}
       <div className="mouse-glow"></div>
 
       <div className="cyber-lines">
-        <span style={{left:"10%"}}></span>
-        <span style={{left:"30%", animationDelay:"2s"}}></span>
-        <span style={{left:"60%", animationDelay:"4s"}}></span>
-        <span style={{left:"80%", animationDelay:"1s"}}></span>
+        <span style={{ left: "10%" }}></span>
+        <span style={{ left: "30%", animationDelay: "2s" }}></span>
+        <span style={{ left: "60%", animationDelay: "4s" }}></span>
+        <span style={{ left: "80%", animationDelay: "1s" }}></span>
       </div>
-      {/* Mobile Banner */}
-<div className="acc-mobile-banner">
-  <img src={building} alt="Accommodation Banner" />
-</div>
-
 
       <div className="accommodation-page">
 
+        {/* Mobile Banner */}
+        <div className="acc-mobile-banner">
+          <img src={building} alt="Accommodation Banner" />
+        </div>
+
         {/* HERO */}
-        <section className="acc-hero">
-      
+        <section className="acc-hero reveal">
+          <h1 className="glitch" data-text="ACCOMMODATION">
+           
+          </h1>
         </section>
+
+        <div className="neon-divider"></div>
 
         {/* ABOUT */}
         <section className="about-acc-section reveal">
-
           <h2 className="about-heading">ABOUT ACCOMMODATION</h2>
 
           <div className="about-container">
 
-            <div className="about-card left">
+            <div className="about-card">
               <h3>BOOK YOUR HOTEL</h3>
 
               <div className="logo-box">
@@ -93,26 +100,28 @@ const Accommodation = () => {
               <span>&gt;&gt;&gt;</span>
             </div>
 
-            <div className="about-card right">
-              <h3>ACCOMMODATION BY TECHFEST</h3>
+            <div className="about-card">
+              <h3>ACCOMMODATION BY TECHALPHA</h3>
 
               <p className="desc">
-                Note: Due to overwhelming demand, accommodation may be arranged 
-                either on campus or at an official partner hotel depending on 
-                availability. Rest assured, we will do our best to house your 
-                group members together.
+                Due to overwhelming demand, accommodation may be arranged 
+                either on campus or at an official partner hotel depending 
+                on availability. We will try to house your group together.
               </p>
 
               <p className="desc small">
-                Fill this form to get notified as soon as more seats are made available:
+                Fill this form to get notified when seats open:
               </p>
 
-              <a href="https://forms.gle/gPJtMv1X7oNYAbsq6"><button className="interest-btn" >FILL INTEREST</button></a>
-              
+              <a href="https://forms.gle/gPJtMv1X7oNYAbsq6">
+                <button className="interest-btn">FILL INTEREST</button>
+              </a>
             </div>
 
           </div>
         </section>
+
+        <div className="neon-divider"></div>
 
         {/* GENERAL DETAILS */}
         <section className="acc-section reveal">
@@ -136,15 +145,21 @@ const Accommodation = () => {
           </div>
         </section>
 
+        <div className="neon-divider"></div>
+
         {/* EVENT */}
         <section className="acc-section reveal">
           <div className="event-card">
             <h2>TECHALPHA 2026</h2>
             <p>Hackathon & Software Fest</p>
-           <a href="   https://forms.gle/gPJtMv1X7oNYAbsq6"> <button className="glow-btn">BOOK NOW</button></a>
-         
+
+            <a href="https://forms.gle/gPJtMv1X7oNYAbsq6">
+              <button className="glow-btn">BOOK NOW</button>
+            </a>
           </div>
         </section>
+
+        <div className="neon-divider"></div>
 
         {/* PERKS */}
         <section className="acc-section reveal">
@@ -155,6 +170,8 @@ const Accommodation = () => {
             <div className="perk">CONVENIENT STAY</div>
           </div>
         </section>
+
+        <div className="neon-divider"></div>
 
         {/* FAQ */}
         <section className="acc-section reveal">
@@ -167,7 +184,7 @@ const Accommodation = () => {
 
           <details className="faq">
             <summary>Is food included?</summary>
-            <p>NO Food is not available but nearby partner restaurants are there.</p>
+            <p>No, but nearby partner restaurants are available.</p>
           </details>
         </section>
 

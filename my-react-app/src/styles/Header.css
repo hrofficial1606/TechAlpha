@@ -226,6 +226,19 @@
     color: white;
     text-decoration: none;
   }
+   .nav-btn {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-btn.hide-nav {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.nav-btn.show-nav {
+  transform: translateY(0);
+  opacity: 1;
+}
 
   /* ICON SIZE */
 

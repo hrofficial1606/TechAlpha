@@ -5,8 +5,34 @@ import { FaBuilding } from "react-icons/fa";
 import { GrWorkshop } from "react-icons/gr";
 import { GiTrophy } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
+import { useEffect, useState } from "react";
+
 
 function Header() {
+
+  const [showBottomNav, setShowBottomNav] = useState(true);
+const [lastScrollY, setLastScrollY] = useState(0);
+
+useEffect(() => {
+  const handleScroll = () => {
+
+    // only mobile
+    if (window.innerWidth <= 768) {
+
+      if (window.scrollY > lastScrollY && window.scrollY > 50) {
+        setShowBottomNav(false); // hide
+      } else {
+        setShowBottomNav(true); // show
+      }
+
+      setLastScrollY(window.scrollY);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [lastScrollY]);
+
   return (
     <div className="top-header">
      
@@ -40,7 +66,8 @@ function Header() {
       </div>
             
               {/* CENTER MENU */}
-      <div className="nav-btn">
+      <div className={`nav-btn ${showBottomNav ? "show-nav" : "hide-nav"}`}>
+
          <NavLink to="/"> <FaHome />Home </NavLink>
          <NavLink to="/acm"><FaBuilding /> ACCOMMODATION</NavLink>
         <NavLink to="/workshops"><GrWorkshop /> WORKSHOPS</NavLink>
