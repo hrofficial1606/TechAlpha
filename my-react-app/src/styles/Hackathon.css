@@ -143,12 +143,12 @@
 
 .card-img {
   width: 200px;
-  filter: drop-shadow(0 0 15px #9d00ff);
+  filter: drop-shadow(0 0 15px #ffffff);
 }
 
 .card-img1 {
   width: 300px;
-  filter: drop-shadow(0 0 15px #9d00ff);
+  filter: drop-shadow(0 0 15px #ffffff);
 }
 
 

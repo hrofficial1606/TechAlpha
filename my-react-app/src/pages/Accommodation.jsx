@@ -107,7 +107,8 @@ const Accommodation = () => {
                 Fill this form to get notified as soon as more seats are made available:
               </p>
 
-              <button className="interest-btn">FILL INTEREST</button>
+              <a href="https://forms.gle/gPJtMv1X7oNYAbsq6"><button className="interest-btn" >FILL INTEREST</button></a>
+              
             </div>
 
           </div>
@@ -140,7 +141,8 @@ const Accommodation = () => {
           <div className="event-card">
             <h2>TECHALPHA 2026</h2>
             <p>Hackathon & Software Fest</p>
-            <button className="glow-btn">BOOK NOW</button>
+           <a href="   https://forms.gle/gPJtMv1X7oNYAbsq6"> <button className="glow-btn">BOOK NOW</button></a>
+         
           </div>
         </section>
 

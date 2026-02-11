@@ -4,6 +4,7 @@ import "../styles/Sponsors.css";
 import Header from "../components/Header";
 import SideMenu from "../components/SideMenu";
 import RightSideMenu from "../components/RightSideMenu";
+import collablogo from "../assets/collabcollege.png"   
 
 function Sponsors() {
 
@@ -81,7 +82,26 @@ function Sponsors() {
           </p>
 
         </div>
+            
+            <div className="sponsors-card floating-card reveal">
 
+          <img
+            src={collablogo}
+            alt="Sponsor Logo"
+            className="sponsor-logo"
+          />
+
+          <p>
+           Priyadarshini College of Engineering, Nagpur is a premier institution dedicated to academic excellence, innovation, and holistic student development.
+          </p>
+
+          <p>
+           Through industry-focused education and practical learning, the college prepares students to meet real-world technological challenges.
+          </p>
+
+          
+
+        </div>
       </section>
 
     </div>

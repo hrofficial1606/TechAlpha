@@ -53,11 +53,18 @@
 
 .about-container {
   display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-left: -120px;
   margin-top: 10px;
 }
 
+
+.arrow-area{
+  justify-content: center;
+  padding-left: 100px;
+  margin-right: -15px;
+}
 /* GLASSMORPHISM CARDS */
 .about-card,
 .detail-card,

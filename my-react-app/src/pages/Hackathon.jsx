@@ -9,7 +9,7 @@ import Header from "../components/Header";
 import SideMenu from "../components/SideMenu";
 import RightSideMenu from "../components/RightSideMenu";
 import qrImg from "../assets/qr.jpeg";
-import collablogo from "../assets/collablogo.png"   
+import collablogo from "../assets/image.png"   
 import { NavLink } from "react-router-dom";
 
 import { FaMailBulk } from "react-icons/fa";
@@ -153,16 +153,21 @@ function Hackathon() {
         </div>
 
         <div className="glass-card floating-card reveal">
+
+          <h2>Widesoftech Pvt. Ltd.</h2>
           <p>
-            Widesoftech is a leading technology company empowering innovation and talent.
+          Widesoftech Pvt. Ltd. is a Nagpur-based technology and software services company focused on delivering innovative digital solutions, IT services, and professional training. The company works in areas such as software development, UI/UX, web technologies, and consulting, helping businesses and students build practical, industry-ready skills and solutions.
           </p>
 
           <p>
-            Together, TechAlpha and Widesoftech bridge the gap between learning and industry.
+           Founded in 2022, Widesoftech Pvt. Ltd. operates as a private limited company headquartered in Nagpur, Maharashtra, and provides services across multiple domains including IT services, education and training, and digital technologies.
           </p>
 
           <p>
-            Interested in sponsoring? Contact us today.
+           The organization is also known for offering hands-on training, internships, and real-world project exposure, helping students bridge the gap between academic learning and industry requirements.
+          </p>
+          <p>
+            As a sponsor of this hackathon, Widesoftech Pvt. Ltd. supports innovation, technical learning, and real-world problem solving. Their contribution encourages participants to apply their knowledge, collaborate, and develop impactful technology solutions.
           </p>
         </div>
 
@@ -178,15 +183,21 @@ function Hackathon() {
         </div>
 
         <div className="glass-card floating-card reveal">
+           <h2>Department of Industrial IoT</h2>
+           <h3>Priyadarshini College of Engineering, Nagpur</h3>
           <p>
-          Priyadarshini College of Engineering, Nagpur is a premier institution dedicated to academic excellence, innovation, and holistic student development.
-          </p>
+          The Department of Industrial Internet of Things (IIoT), Priyadarshini College of Engineering, Nagpur is dedicated to advancing innovation in smart technologies, automation, and connected systems. The department focuses on equipping students with practical skills in IoT, embedded systems, cloud integration, and industrial automation to meet the evolving demands of Industry 4.0.
+           </p>
 
           <p>
-            Through industry-focused education and practical learning, the college prepares students to meet real-world technological challenges.
-          </p>
+           Priyadarshini College of Engineering is approved by A.I.C.T.E., New Delhi and the Government of Maharashtra, and is affiliated with Rashtrasant Tukadoji Maharaj Nagpur University, Nagpur. The institution is known for promoting technical excellence, research, and industry collaboration.
+           </p>
 
-          
+           <p>
+            As a collaborating academic partner for this hackathon, the Department of Industrial IoT actively supports innovation, encourages problem-solving, and provides a platform for students and developers to showcase their creativity and technical skills in real-world challenges.
+
+           </p>
+
         </div>
 
       </section>

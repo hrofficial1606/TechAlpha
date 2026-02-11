@@ -20,7 +20,7 @@ function RightSideMenu() {
       <ul onClick={() => setOpen(false)}>
 
         <li>
-          <NavLink to="https://www.instagram.com/widesoftech?igsh=MTl6OGg4NzZ6N3pnNQ==">
+          <NavLink to="https://www.instagram.com/techalfa_/">
             <FaInstagram />
           </NavLink>
         </li>
