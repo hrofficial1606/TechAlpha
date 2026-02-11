@@ -7,16 +7,22 @@ import { GiTrophy } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
+import { useLocation } from "react-router-dom";
+
+
 
 function Header() {
 
   const [showBottomNav, setShowBottomNav] = useState(true);
 const [lastScrollY, setLastScrollY] = useState(0);
+const location = useLocation();
+const isHomePage = location.pathname === "/";
 
 useEffect(() => {
   const handleScroll = () => {
 
     // only mobile
+    if (isHomePage) return;
     if (window.innerWidth <= 768) {
 
       if (window.scrollY > lastScrollY && window.scrollY > 50) {
