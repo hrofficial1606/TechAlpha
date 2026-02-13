@@ -2,66 +2,119 @@ import "../styles/timeline.css";
 import React, { useEffect, useRef, useState } from "react";
 
 const day1Events = [
- {
-    time: "8:00 AM to 10:00 AM",
-    title: "Registration & Inauguration",
-    points: ["Participant registration and ID verification Inauguration ceremony with guests and faculty Overview of HackWhack 3.0 objectives and theme"]
-  },
   {
-    time: "10:15 AM – 11:30 AM",
-    title: "Welcome & Opening Remarks",
-    points: ["Breakfast provided to all participants", "Setup time for PPT presentations"]
-  },
-  {
-    time: "11:30 AM – 01:30 PM",
-    title: "PPT Presentation Round",
-    points: [ " Official welcome by organizers, introduction to the hackathon theme, rules, and expectations. Get inspired and motivated!"]
-  },
-  {
-    time: "01:30 PM – 02:30 PM",
-    title: "Lunch Break",
-    points: ["Lunch provided", "Consent signing"]
-  },
-  {
-    time: "02:30 PM – 05:00 PM",
-    title: "PPT Evaluation",
-    points: ["Shortlisting teams for the coding round", "Finalization of results based on PPT performance"]
-  },
-  {
-    time: "05:00 PM – 06:00 PM",
-    title: "Break & Result Declaration",
-    points: ["Announcement of shortlisted teams (30 teams)", "Refreshment break"]
-  }
+        time: "7:30 AM – 8:30 AM",
+        activity: "Reporting & Registration",
+        points: "Participants arrive, verify registration, receive ID badges, and complete entry formalities."
+      },
+      {
+        time: "8:30 AM – 9:00 AM",
+        activity: "Arrival of Guests",
+        points: "Chief guests, judges, and mentors arrive and are welcomed by organizers."
+      },
+      {
+        time: "9:00 AM – 9:30 AM",
+        activity: "Inauguration Ceremony",
+        points: "Opening session including welcome speech, introduction of guests, and overview of the event."
+      },
+      {
+        time: "9:30 AM – 10:00 AM",
+        activity: "Hackathon Kick-off",
+        points: "Rules, evaluation criteria, and guidelines for participants are explained."
+      },
+      {
+        time: "10:00 AM – 1:00 PM",
+        activity: "Idea Finalization & PPT Preparation",
+        points: "Teams brainstorm, finalize their ideas, and prepare presentations describing their concept."
+      },
+      {
+        time: "1:00 PM – 1:45 PM",
+        activity: "Lunch Break",
+        points: "Lunch and informal networking with other participants."
+      },
+      {
+        time: "1:45 PM – 4:30 PM",
+        activity: "Prototype Development",
+        points: "Teams begin designing and building initial versions of their project or prototype."
+      },
+      {
+        time: "4:30 PM – 4:45 PM",
+        activity: "Tea Break",
+        points: "Short refreshment break to relax and recharge."
+      },
+      {
+        time: "4:45 PM – 6:30 PM",
+        activity: "PPT & Prototype Refinement",
+        points: "Teams improve their presentation and prototype based on feedback and testing."
+      },
+      {
+        time: "6:30 PM – 7:30 PM",
+        activity: "Day 1 Wrap-up",
+        points: "Summary of the day, instructions for the next day, and closing announcements."
+      }
 ];
 
 const day2Events = [
- {
-    time: "09:00 AM – 10:00 AM",
-    title: "Rule Explanation",
-    points: ["Coding rules explanation", "Consent signing"]
-  },
   {
-    time: "10:00 PM – 2:00 PM",
-    title: "Coding Round",
-    points: ["Evaluation checkpoints at 2:00 AM and 6:00 AM", "Mentor support for debugging, design, and optimization"
-      ,"Continuous overnight coding session"]
-  },
-  {
-    time: "02:00 PM",
-    title: "Hack Ends | Submission Deadline",
-    points: ["Submit your projects and get ready to present your innovative solutions to the judges."]
-  },
-  {
-    time: "02:00 PM – 04:00 AM",
-    title: "Judging & Conclusion",
-    points: ["Judges evaluate the projects based on creativity, technicality, feasibility and impact. Get ready to showcase your hard work!"
-    ]
-  },
-  {
-    time: "04:00 AM – 05:00 AM",
-    title: "Prize Distribution & Closing Ceremony",
-    points: ["Celebrate your achievements, network with fellow participants, and enjoy the closing ceremony.", "Thank you for your participation, dedication, and hard work. See you at the next hackathon!"]
-  }
+        time: "7:30 AM – 8:00 AM",
+        activity: "Reporting of Selected Teams",
+        points: "Shortlisted teams report and confirm participation for Day 2."
+      },
+      {
+        time: "8:00 AM – 8:30 AM",
+        activity: "Problem Statement Announcement",
+        points: "Official problem statements are revealed by organizers or industry partners."
+      },
+      {
+        time: "8:30 AM – 9:00 AM",
+        activity: "Understanding & Q&A",
+        points: "Teams clarify requirements, ask questions, and understand expectations."
+      },
+      {
+        time: "9:00 AM – 12:00 PM",
+        activity: "Ideation & Planning",
+        points: "Teams design the solution, define architecture, and divide tasks."
+      },
+      {
+        time: "12:00 PM – 12:30 PM",
+        activity: "Mentor Review",
+        points: "Mentors evaluate progress and provide suggestions for improvement."
+      },
+      {
+        time: "12:30 PM – 1:15 PM",
+        activity: "Break",
+        points: "Lunch or rest period before development continues."
+      },
+      {
+        time: "1:15 PM – 4:30 PM",
+        activity: "Development & Implementation",
+        points: "Teams build the solution, write code, and integrate components."
+      },
+      {
+        time: "4:30 PM – 4:45 PM",
+        activity: "Tea Break",
+        points: "Short refreshment break."
+      },
+      {
+        time: "4:45 PM – 6:00 PM",
+        activity: "Testing & Optimization",
+        points: "Teams test functionality, fix bugs, and optimize performance."
+      },
+      {
+        time: "6:00 PM – 6:30 PM",
+        activity: "Final PPT Submission",
+        points: "Teams submit final presentations and documentation."
+      },
+      {
+        time: "6:30 PM – 7:15 PM",
+        activity: "Final Presentation",
+        points: "Teams present their solutions to judges and answer questions."
+      },
+      {
+        time: "7:15 PM – 7:30 PM",
+        activity: "Result Announcement & Prize Distribution",
+        points: "Winners are announced and prizes and certificates are distributed."
+      }
 ];
 
 export default function Timeline() {
@@ -154,11 +207,9 @@ export default function Timeline() {
           <div className="card-glow"></div>
 
           <p className="time">{event.time}</p>
-          <h2>{event.title}</h2>
+          <h2>{event.activity}</h2>
           <ul>
-            {event.points.map((p, i) => (
-              <li key={i}>{p}</li>
-            ))}
+            {event.points}
           </ul>
         </div>
       ))}
