@@ -3,7 +3,7 @@ import "../styles/Countdown.css";
 
 export default function Countdown() {
   // Set your event date here
-  const targetDate = new Date("2026-02-20T10:00:00").getTime();
+  const targetDate = new Date("2026-02-21T10:00:00").getTime();
 
   const calculateTimeLeft = () => {
     const now = new Date().getTime();
