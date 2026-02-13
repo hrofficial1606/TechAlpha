@@ -24,6 +24,11 @@ function RightSideMenu() {
             <FaInstagram />
           </NavLink>
         </li>
+         <li>
+          <NavLink to="https://www.instagram.com/techalfa_/">
+            <FaInstagram />
+          </NavLink>
+        </li>
 
         <li>
           <NavLink to="https://www.linkedin.com/company/widesoftech-pvt-ltd/">

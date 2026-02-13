@@ -49,7 +49,17 @@ function SideMenu() {
     rel="noreferrer"
   >
     <FaInstagram />
-    Instagram
+    Instagram <br/>WideSoftech
+  </a>
+</li>
+<li className="mobile-social">
+  <a
+    href="https://www.instagram.com/techalfa_?igsh=MzV0bHpvaXV5Y2tn"
+    target="_blank"
+    rel="noreferrer"
+  >
+    <FaInstagram />
+    Instagram <br/>TechAlfa
   </a>
 </li>
 

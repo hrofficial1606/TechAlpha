@@ -14,7 +14,7 @@
   background-position: top center;
   
   display: block;
- 
+
   justify-content: center;
   align-items: flex-start;
 
@@ -22,24 +22,22 @@
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 200px;
-  
 }
 
 
 /* ===============================
-   GLASS CARD
+   GLASS CARD (DESKTOP SAME)
 ================================ */
 
 .sponsors-card {
   width: 80%;
   max-width: 900px;
   margin-top: 200px;
-   margin-left: 300px;
+  margin-left: 300px;  /* desktop unchanged */
 
   background: rgba(110, 0, 200, 0.90);
   border: 1px solid rgba(180, 100, 255, 0.4);
 
-  /* TOP padding reduced */
   padding: 10px 22px 18px 22px;
 
   border-radius: 16px;
@@ -77,13 +75,10 @@
 
 .sponsor-logo {
   width: 180px;
-
-  margin-top: 0;        /* IMPORTANT */
-  margin-bottom: 8px;  /* Smaller gap */
-
+  margin-top: 0;
+  margin-bottom: 8px;
   filter: drop-shadow(0 0 20px #ffffff);
 }
-
 
 
 /* ===============================
@@ -95,17 +90,9 @@
 }
 
 @keyframes floatCard {
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-15px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
 }
 
 
@@ -126,23 +113,56 @@
 
 
 /* ===============================
-   MOBILE RESPONSIVE
+   MOBILE RESPONSIVE (ONLY OVERRIDES)
 ================================ */
 
 @media (max-width: 768px) {
 
   .sponsors-section {
-    padding-top: 300px;
+    padding-top: 180px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 140px; /* prevents bottom navbar overlap */
   }
 
+  /* Override desktop margin-left */
   .sponsors-card {
-    width: 95%;
-    padding: 18px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    padding: 16px;
     font-size: 14px;
   }
 
-  .sponsor-logo {
-    width: 150px;
+  /* spacing between cards */
+  .sponsors-card + .sponsors-card {
+    margin-top: 50px;
   }
 
+  .sponsor-logo {
+    width: 130px;
+    height: auto;
+  }
+}
+
+
+/* ===============================
+   SMALL PHONES
+================================ */
+
+@media (max-width: 480px) {
+
+  .sponsors-section {
+    padding-top: 150px;
+  }
+
+  .sponsors-card {
+    padding: 14px;
+    font-size: 13px;
+  }
+
+  .sponsor-logo {
+    width: 110px;
+  }
 }
