@@ -90,7 +90,7 @@ function About() {
 
      <div className="about-card floating-card reveal">
             
-            <h2>Founder</h2>
+            <h2>organizer</h2>
              <img
             src={founder}
             alt="founder image"
