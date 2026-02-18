@@ -19,7 +19,8 @@ import Countdown from "../components/Countdown";
 import Prizes from "../components/Prizes";
 function Hackathon() {
      
-    
+    const registrationClosed = true;   // change to false to open registration
+
 
   useEffect(() => {
 
@@ -253,28 +254,40 @@ function Hackathon() {
       {/* SCAN TO REGISTER */}
 <section className="section">
 
-  <div className="section-title reveal">SCAN TO REGISTER</div>
+  <div className="section-title reveal">REGISTRATION</div>
 
-  <div className="qr-container glass-card floating-card reveal">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdYId8H8SnU6iYrb-lqgsMiBMCT956ENM51LU2GTN54XW8lNw/viewform" target="_blank">
-    <img src={qrImg} alt="Scan QR" className="qr-img" />
-   </a>
-    <div className="qr-text">
-      <h3>Scan & Register</h3>
+  {registrationClosed ? (
+    <div className="qr-container glass-card floating-card reveal">
+      <h2 style={{ color: "red" }}>Registration Closed</h2>
       <p>
-        Scan this QR code or Click on QR code to instantly register for
-        TechAlpha Hackathon 2026.
+        Thank you for your interest. Registration for TechAlpha Hackathon 2026
+        is now closed.
       </p>
-
-      <p className="qr-note">
-        Limited seats available 🚀
-      </p>
-       
+      <p>Stay tuned for future events 🚀</p>
     </div>
-         
-  </div>
-        <Countdown/>
+  ) : (
+    <div className="qr-container glass-card floating-card reveal">
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdYId8H8SnU6iYrb-lqgsMiBMCT956ENM51LU2GTN54XW8lNw/viewform"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img src={qrImg} alt="Scan QR" className="qr-img" />
+      </a>
+
+      <div className="qr-text">
+        <h3>Scan & Register</h3>
+        <p>
+          Scan this QR code or click it to instantly register for
+          TechAlpha Hackathon 2026.
+        </p>
+        <p className="qr-note">Limited seats available 🚀</p>
+      </div>
+    </div>
+  )}
+
 </section>
+      
 
 
       {/* FOOTER */}
