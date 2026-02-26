@@ -1,26 +1,27 @@
 package tehalfa.backend.controller;
 
-import lombok.RequiredArgsConstructor;
-import org.hibernate.mapping.List;
-import org.springframework.security.access.prepost.PreAuthorize;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
+
 import tehalfa.backend.entity.Event;
+import tehalfa.backend.service.EventService;
 
 @RestController
 @RequestMapping("/events")
-@RequiredArgsConstructor
+@CrossOrigin(origins="http://localhost:5173")
 public class EventController {
 
     private final EventService service;
 
-    // 👑 ADMIN ONLY
-    @PostMapping("/create")
-    @PreAuthorize("hasRole('ADMIN')")
-    public Event createEvent(@RequestBody Event event){
+    public EventController(EventService service){
+        this.service = service;
+    }
+
+    @PostMapping
+    public Event create(@RequestBody Event event){
         return service.save(event);
     }
 
-    // 👥 ALL LOGGED USERS
     @GetMapping
     public List<Event> getAll(){
         return service.getAll();

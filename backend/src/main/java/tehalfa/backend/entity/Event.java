@@ -1,15 +1,14 @@
 package tehalfa.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import lombok.Data;
-import jakarta.persistence.Id;
 import jakarta.persistence.*;
-
+import lombok.*;
 
 @Entity
-@Data
-@Table(name = "events")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Event {
 
     @Id
@@ -17,12 +16,5 @@ public class Event {
     private Long id;
 
     private String title;
-
     private String description;
-
-    private String location;
-
-    private String eventDate;
-
-    private String bannerUrl;
 }
