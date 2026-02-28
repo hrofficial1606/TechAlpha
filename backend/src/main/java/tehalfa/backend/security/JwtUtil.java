@@ -24,8 +24,10 @@ public class JwtUtil {
         return getClaims(token).getSubject();
     }
 
-    public boolean validate(String token,String username){
-        return extractUsername(token).equals(username);
+    // ✅ FIXED METHOD NAME
+    public boolean validateToken(String token,String username){
+        return extractUsername(token).equals(username)
+                && !isTokenExpired(token);
     }
 
     private Claims getClaims(String token){
@@ -33,5 +35,11 @@ public class JwtUtil {
                 .setSigningKey(SECRET)
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    private boolean isTokenExpired(String token){
+        return getClaims(token)
+                .getExpiration()
+                .before(new Date());
     }
 }
