@@ -1,11 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/Workshop.css";
 
-function FuturisticCard({ title, image, price, oldPrice, tag, status,pdf }) {
+function FuturisticCard({ title, image, price, oldPrice, tag, status, pdf }) {
 
   const navigate = useNavigate();
 
+  const checkLogin = () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login first");
+      navigate("/login");
+      return false;
+    }
+
+    return true;
+  };
+
   const handleExplore = () => {
+
+    if (!checkLogin()) return;
+
     navigate("/workshops/explore", {
       state: {
         title,
@@ -17,11 +32,17 @@ function FuturisticCard({ title, image, price, oldPrice, tag, status,pdf }) {
       }
     });
   };
-  const openForm = () => {
-    window.open("https://docs.google.com/forms/d/e/1FAIpQLSerlTRMcIVSJLJcs3dZWn-pm6_0DrydaZqJTR17LbS6ZuGx1w/viewform", "_blank");
+
+  const handleRegister = () => {
+
+    if (!checkLogin()) return;
+
+    // later this will call backend registration
+    alert("Proceeding to registration...");
   };
 
   return (
+
     <div className={`f-card ${status === "sold" ? "sold-card" : ""}`}>
 
       <div className="f-tag">{tag}</div>
@@ -35,11 +56,15 @@ function FuturisticCard({ title, image, price, oldPrice, tag, status,pdf }) {
       <div className="f-buttons">
 
         {status === "sold" ? (
-          <button className="sold-btn">SOLD OUT</button>
+          <button className="sold-btn">
+            SOLD OUT
+          </button>
         ) : (
           <>
-            <button className="register-btn"
-            onClick={openForm}>
+            <button
+              className="register-btn"
+              onClick={handleRegister}
+            >
               REGISTER
             </button>
 

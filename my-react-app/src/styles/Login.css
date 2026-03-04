@@ -1,0 +1,58 @@
+.login-page{
+  min-height:100vh;
+  background:#050510;
+}
+
+/* CENTER LOGIN FORM */
+
+.login-wrapper{
+  height:80vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.login-card{
+  width:380px;
+  padding:40px;
+  background:#0b0c15;
+  border-radius:12px;
+  box-shadow:0 0 30px rgba(120,0,255,0.3);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.login-title{
+  text-align:center;
+  color:white;
+  letter-spacing:2px;
+}
+
+.login-input{
+  padding:12px;
+  border-radius:6px;
+  border:none;
+  background:#e6e6e6;
+}
+
+.login-btn{
+  padding:12px;
+  border:none;
+  border-radius:6px;
+  background:#19a7ce;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.login-register{
+  text-align:center;
+  color:#bbb;
+}
+
+.register-link{
+  color:#19a7ce;
+  margin-left:6px;
+  cursor:pointer;
+}

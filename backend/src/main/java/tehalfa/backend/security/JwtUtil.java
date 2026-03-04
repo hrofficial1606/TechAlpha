@@ -1,45 +1,53 @@
 package tehalfa.backend.security;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
 
-    private final String SECRET = "techalfa-secret";
+    private final String SECRET =
+            "TechAlfaSecretKeyTechAlfaSecretKey123456";
 
-    public String generateToken(String email) {
+    private Key getKey(){
+        return Keys.hmacShaKeyFor(SECRET.getBytes());
+    }
+
+    public String generateToken(String email,String role){
 
         return Jwts.builder()
                 .setSubject(email)
+                .claim("role",role)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis()+86400000))
-                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .setExpiration(new Date(
+                        System.currentTimeMillis()+86400000))
+                .signWith(getKey())
                 .compact();
     }
 
-    public String extractUsername(String token) {
+    public String extractEmail(String token){
         return getClaims(token).getSubject();
     }
 
-    // ✅ FIXED METHOD NAME
-    public boolean validateToken(String token,String username){
-        return extractUsername(token).equals(username)
-                && !isTokenExpired(token);
+    // ⭐ THIS METHOD FIXES YOUR ERROR
+    public boolean isValid(String token){
+        try{
+            getClaims(token);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 
     private Claims getClaims(String token){
-        return Jwts.parser()
-                .setSigningKey(SECRET)
+        return Jwts.parserBuilder()
+                .setSigningKey(getKey())
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
-    }
-
-    private boolean isTokenExpired(String token){
-        return getClaims(token)
-                .getExpiration()
-                .before(new Date());
     }
 }

@@ -1,15 +1,18 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/WorkshopExplore.css";
-
+import API from "../services/api";
 import Header from "../components/Header";
 import SideMenu from "../components/SideMenu";
 import RightSideMenu from "../components/RightSideMenu";
-import qrImg from "../assets/Webinar-QR.jpeg";   
+
+import qrImg from "../assets/Webinar-QR.jpeg";
 
 function WorkshopExplore() {
 
   const location = useLocation();
+  const navigate = useNavigate();
+
   const workshop = location.state;
 
   if (!workshop) {
@@ -20,17 +23,52 @@ function WorkshopExplore() {
     );
   }
 
-const openPdf = () => {
-  if (workshop.pdf) {
-    window.open(workshop.pdf, "_blank");
-  } else {
-    alert("PDF not available");
-  }
-};
+  const checkLogin = () => {
 
-  const openForm = () => {
-    window.open("https://docs.google.com/forms/d/e/1FAIpQLSerlTRMcIVSJLJcs3dZWn-pm6_0DrydaZqJTR17LbS6ZuGx1w/viewform", "_blank");
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please login first");
+      navigate("/login");
+      return false;
+    }
+
+    return true;
   };
+
+  const openPdf = () => {
+
+    if (workshop.pdf) {
+      window.open(workshop.pdf, "_blank");
+    } else {
+      alert("PDF not available");
+    }
+
+  };
+
+const openForm = async () => {
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("Please login first");
+    navigate("/login");
+    return;
+  }
+
+  try {
+
+    const res = await API.post(`/registration/${workshop.id}`);
+
+    alert("Registration Successful!");
+
+  } catch (err) {
+
+    alert("Registration failed");
+
+  }
+
+};
 
   return (
     <div className="explore-page">
@@ -47,8 +85,21 @@ const openPdf = () => {
           <img src={workshop.image} alt={workshop.title} />
 
           <div className="workshop-btns">
-            <button className="btn-primary" onClick={openForm}>Register</button>
-         <button className="btn-secondary" onClick={openPdf}>Content</button> 
+
+            <button
+              className="btn-primary"
+              onClick={openForm}
+            >
+              Register
+            </button>
+
+            <button
+              className="btn-secondary"
+              onClick={openPdf}
+            >
+              Content
+            </button>
+
           </div>
 
         </div>
@@ -92,61 +143,49 @@ const openPdf = () => {
                 <h5>Duration</h5>
                 <p>12–16 Hours</p>
               </div>
-         
 
             </div>
 
-
           </div>
-
-                  {/*
-                      <div className="tab-buttons">
-                      <button className="active-tab">Details</button>
-                      <button>Discounts</button>
-                      <button>Rules</button>
-                      <button>Contact</button>
-                     </div>
-                  
-                  */}
 
         </div>
 
       </div>
-                {/* SCAN TO REGISTER */}
+
+      {/* SCAN TO REGISTER */}
       <section className="section">
 
-  <h2 className="section-title">SCAN TO REGISTER</h2>
+        <h2 className="section-title">
+          SCAN TO REGISTER
+        </h2>
 
-  <div className="qr-container">
+        <div className="qr-container">
 
-    <a 
-      href="https://docs.google.com/forms/d/e/1FAIpQLSerlTRMcIVSJLJcs3dZWn-pm6_0DrydaZqJTR17LbS6ZuGx1w/viewform"
-      target="_blank"
-    
-    >
+          <img
+            src={qrImg}
+            alt="Scan QR"
+            className="qr-img"
+            onClick={openForm}
+          />
 
-      <img src={qrImg} alt="Scan QR" className="qr-img" />
+          <div className="qr-text">
 
-    </a>
+            <h3>Scan & Register</h3>
 
-    <div className="qr-text">
-      <h3>Scan & Register</h3>
+            <p>
+              Scan this QR code or click to instantly register
+              for TechAlpha Workshop.
+            </p>
 
-      <p>
-        Scan this QR code or click to instantly register for
-        TechAlpha Hackathon 2026.
-      </p>
+            <p className="qr-note">
+              Limited seats available 🚀
+            </p>
 
-      <p className="qr-note">
-        Limited seats available 🚀
-      </p>
-    </div>
+          </div>
 
-  </div>
+        </div>
 
-</section>
-
-        
+      </section>
 
     </div>
   );

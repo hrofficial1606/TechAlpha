@@ -2,19 +2,22 @@ package tehalfa.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
 
     @Column(unique = true)
     private String email;
@@ -23,4 +26,12 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    private LocalDateTime createdAt;
+
+    private boolean verified;
+
+    private String otp;
+
+    private LocalDateTime otpExpiry;
 }

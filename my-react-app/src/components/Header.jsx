@@ -1,88 +1,147 @@
-import { NavLink } from "react-router-dom";
-import logo from "../assets/logoTechAlpha.png"
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import logo from "../assets/logoTechAlpha.png";
 import "../styles/Header.css";
+
 import { FaBuilding } from "react-icons/fa";
 import { GrWorkshop } from "react-icons/gr";
 import { GiTrophy } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
+
 import { useEffect, useState } from "react";
-
-import { useLocation } from "react-router-dom";
-
-
 
 function Header() {
 
   const [showBottomNav, setShowBottomNav] = useState(true);
-const [lastScrollY, setLastScrollY] = useState(0);
-const location = useLocation();
-const isHomePage = location.pathname === "/";
+  const [lastScrollY, setLastScrollY] = useState(0);
 
-useEffect(() => {
-  const handleScroll = () => {
+  const [userName, setUserName] = useState(null);
 
-    // only mobile
-    if (isHomePage) return;
-    if (window.innerWidth <= 768) {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-      if (window.scrollY > lastScrollY && window.scrollY > 50) {
-        setShowBottomNav(false); // hide
-      } else {
-        setShowBottomNav(true); // show
+  const isHomePage = location.pathname === "/";
+
+  useEffect(() => {
+
+    const name = localStorage.getItem("name");
+
+    if (name) {
+      setUserName(name);
+    }
+
+  }, []);
+
+  useEffect(() => {
+
+    const handleScroll = () => {
+
+      if (isHomePage) return;
+
+      if (window.innerWidth <= 768) {
+
+        if (window.scrollY > lastScrollY && window.scrollY > 50) {
+          setShowBottomNav(false);
+        } else {
+          setShowBottomNav(true);
+        }
+
+        setLastScrollY(window.scrollY);
       }
 
-      setLastScrollY(window.scrollY);
-    }
-  };
+    };
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [lastScrollY]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+
+  }, [lastScrollY]);
+
+  const logout = () => {
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+
+    setUserName(null);
+
+    navigate("/");
+
+  };
 
   return (
     <div className="top-header">
-     
-       <div
-          className="mobile-menu-btn"
-          onClick={() => {
+
+      {/* MOBILE MENU BUTTON */}
+      <div
+        className="mobile-menu-btn"
+        onClick={() => {
           document.querySelector(".side-menu")?.classList.toggle("active");
           document.querySelector(".menu-overlay")?.classList.toggle("active");
-         }}> ☰ </div>
+        }}
+      >
+        ☰
+      </div>
 
-{/* DARK OVERLAY (MOBILE ONLY) */}
-               <div
-               className="menu-overlay"
-                 onClick={() => {
-                  document.querySelector(".side-menu")?.classList.remove("active");
-                  document.querySelector(".menu-overlay")?.classList.remove("active");
-               }}
-            ></div>
+      {/* DARK OVERLAY */}
+      <div
+        className="menu-overlay"
+        onClick={() => {
+          document.querySelector(".side-menu")?.classList.remove("active");
+          document.querySelector(".menu-overlay")?.classList.remove("active");
+        }}
+      ></div>
 
-      {/* LEFT LOGO */}
+      {/* LOGO */}
       <div className="logo">
-        <span className="logo-span"><img src={logo} alt="" className="logoimg" /></span>
+        <span className="logo-span">
+          <img src={logo} alt="" className="logoimg" />
+        </span>
       </div>
-        
 
-      {/* CENTER MENU */}
+      {/* DESKTOP NAV */}
       <div className="nav-links">
-         <NavLink to="/acm">ACCOMMODATION</NavLink>
+        <NavLink to="/acm">ACCOMMODATION</NavLink>
         <NavLink to="/workshops">WORKSHOPS</NavLink>
-      <NavLink to="/hackthons">HACKATHON</NavLink>
+        <NavLink to="/hackthons">HACKATHON</NavLink>
       </div>
-            
-              {/* CENTER MENU */}
+
+      {/* MOBILE NAV */}
       <div className={`nav-btn ${showBottomNav ? "show-nav" : "hide-nav"}`}>
 
-         <NavLink to="/"> <FaHome />Home </NavLink>
-         <NavLink to="/acm"><FaBuilding /> ACCOMMODATION</NavLink>
-        <NavLink to="/workshops"><GrWorkshop /> WORKSHOPS</NavLink>
-      <NavLink to="/hackthons"><GiTrophy /> HACKATHON</NavLink>
+        <NavLink to="/">
+          <FaHome /> Home
+        </NavLink>
+
+        <NavLink to="/acm">
+          <FaBuilding /> ACCOMMODATION
+        </NavLink>
+
+        <NavLink to="/workshops">
+          <GrWorkshop /> WORKSHOPS
+        </NavLink>
+
+        <NavLink to="/hackthons">
+          <GiTrophy /> HACKATHON
+        </NavLink>
+
       </div>
+
       {/* RIGHT BUTTON */}
-      <button className="signin-btn">
-        SIGN IN
-      </button>
+
+      {userName ? (
+
+        <button className="signin-btn" onClick={logout}>
+          Hello, {userName} | Logout
+        </button>
+
+      ) : (
+
+        <button
+          className="signin-btn"
+          onClick={() => navigate("/login")}
+        >
+          SIGN IN
+        </button>
+
+      )}
 
     </div>
   );

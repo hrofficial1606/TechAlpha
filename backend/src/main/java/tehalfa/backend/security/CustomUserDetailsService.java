@@ -1,13 +1,9 @@
 package tehalfa.backend.security;
 
-import tehalfa.backend.entity.User;
-import tehalfa.backend.repository.UserRepository;
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
+import tehalfa.backend.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -20,13 +16,14 @@ public class CustomUserDetailsService
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
 
-        User user = repo.findByEmail(email)
+        return repo.findByEmail(email)
+                .map(user ->
+                        User.withUsername(user.getEmail())
+                                .password(user.getPassword())
+                                .roles(user.getRole()
+                                        .name()
+                                        .replace("ROLE_",""))
+                                .build())
                 .orElseThrow();
-
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getEmail())
-                .password(user.getPassword())
-                .roles(user.getRole().name())
-                .build();
     }
 }

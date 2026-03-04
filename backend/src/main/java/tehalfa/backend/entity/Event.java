@@ -2,6 +2,7 @@ package tehalfa.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,5 +17,17 @@ public class Event {
     private Long id;
 
     private String title;
+
     private String description;
+
+    private int price;
+
+    private int totalSeats;
+
+    private int availableSeats;
+
+    private LocalDateTime eventDate;
+
+    @Column(nullable = false)
+    private String status;   // AVAILABLE / SOLD_OUT / CANCELLED
 }

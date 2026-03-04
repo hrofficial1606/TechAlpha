@@ -12,6 +12,8 @@ import Contact from "./pages/Contact";
 import Dev from "./pages/Dev";
 import WorkshopExplore from "./pages/WorkshopExplore";
 import Accommodation from "./pages/Accommodation";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -35,6 +37,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/dev" element={<Dev />} />
           <Route path="/acm" element={<Accommodation />} />
           <Route path="/workshops/explore" element={<WorkshopExplore />} />
+          <Route path="/login" element={<Login />} />
+           <Route path="/register" element={<Register />} />
         
 
       </Routes>
