@@ -1,103 +1,43 @@
 import { useState } from "react";
+import api from "../services/api";
 import { useNavigate } from "react-router-dom";
-import API from "../services/api";
-
-import Header from "../components/Header";
-import SideMenu from "../components/SideMenu";
-import RightSideMenu from "../components/RightSideMenu";
-
-import "../styles/Register.css";
 
 function Register() {
 
   const navigate = useNavigate();
 
-  const [name,setName] = useState("");
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: ""
+  });
 
-  const handleRegister = async () => {
+  const handleChange = (e) => {
+    setForm({...form, [e.target.name]: e.target.value});
+  };
 
-    try{
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      await API.post("/auth/register",{
-        name,
-        email,
-        password
-      });
+    await api.post("/auth/register", form);
 
-      alert("Registration Successful");
+    alert("OTP sent to email");
 
-      navigate("/login");
-
-    }catch(err){
-
-      alert("Registration Failed");
-
-    }
-
+    navigate("/verify");
   };
 
   return (
+    <div>
+      <h2>Register</h2>
 
-    <div className="register-page">
+      <form onSubmit={handleSubmit}>
+        <input name="name" placeholder="Name" onChange={handleChange}/>
+        <input name="email" placeholder="Email" onChange={handleChange}/>
+        <input name="password" type="password" placeholder="Password" onChange={handleChange}/>
 
-      <Header/>
-      <SideMenu/>
-      <RightSideMenu/>
-
-      <div className="register-wrapper">
-
-        <div className="register-card">
-
-          <h2 className="register-title">
-            REGISTER
-          </h2>
-
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="register-input"
-            onChange={(e)=>setName(e.target.value)}
-          />
-
-          <input
-            type="email"
-            placeholder="Email"
-            className="register-input"
-            onChange={(e)=>setEmail(e.target.value)}
-          />
-
-          <input
-            type="password"
-            placeholder="Password"
-            className="register-input"
-            onChange={(e)=>setPassword(e.target.value)}
-          />
-
-          <button
-            className="register-btn"
-            onClick={handleRegister}
-          >
-            CREATE ACCOUNT
-          </button>
-
-          <p className="login-link">
-
-            Already have an account?
-
-            <span onClick={()=>navigate("/login")}>
-              LOGIN
-            </span>
-
-          </p>
-
-        </div>
-
-      </div>
-
+        <button type="submit">Register</button>
+      </form>
     </div>
-
   );
 }
 

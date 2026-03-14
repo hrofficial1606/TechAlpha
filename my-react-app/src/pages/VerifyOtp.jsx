@@ -2,13 +2,13 @@ import { useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 
-function Login(){
+function VerifyOtp(){
 
   const navigate = useNavigate();
 
   const [form,setForm] = useState({
     email:"",
-    password:""
+    otp:""
   });
 
   const handleChange = (e)=>{
@@ -18,32 +18,28 @@ function Login(){
   const handleSubmit = async (e)=>{
     e.preventDefault();
 
-    const res = await api.post("/auth/login",form);
+    await api.post("/auth/verify",form);
 
-    localStorage.setItem("token",res.data);
+    alert("Account Verified");
 
-    alert("Login success");
-
-    navigate("/dashboard");
+    navigate("/login");
   };
 
   return(
     <div>
-
-      <h2>Login</h2>
+      <h2>Verify OTP</h2>
 
       <form onSubmit={handleSubmit}>
 
         <input name="email" placeholder="Email" onChange={handleChange}/>
 
-        <input name="password" type="password" placeholder="Password" onChange={handleChange}/>
+        <input name="otp" placeholder="OTP" onChange={handleChange}/>
 
-        <button type="submit">Login</button>
+        <button type="submit">Verify</button>
 
       </form>
-
     </div>
   );
 }
 
-export default Login;
+export default VerifyOtp;

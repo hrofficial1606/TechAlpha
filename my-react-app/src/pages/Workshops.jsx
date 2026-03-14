@@ -1,83 +1,43 @@
 import { useEffect, useState } from "react";
+import { getEvents } from "../services/eventService";
 
-import Header from "../components/Header";
-import CategorySection from "../components/CategorySection";
-import Footer from "../components/Footer";
-import SideMenu from "../components/SideMenu";
-import RightSideMenu from "../components/RightSideMenu";
+function Workshops(){
 
-import "../styles/Workshop.css";
-
-import API from "../services/api";
-
-function Workshops() {
-
-  const [codingData,setCodingData] = useState([]);
-  const [dataAI,setDataAI] = useState([]);
-  const [soldData,setSoldData] = useState([]);
+  const [events,setEvents] = useState([]);
 
   useEffect(()=>{
 
-    API.get("/events")
-      .then(res=>{
+    const loadEvents = async () => {
 
-        const events = res.data;
+      const data = await getEvents();
 
-        const coding = events.filter(
-          e => e.category === "CODING"
-        );
+      setEvents(data);
 
-        const ai = events.filter(
-          e => e.category === "AI"
-        );
+    };
 
-        const sold = events.filter(
-          e => e.status === "SOLD_OUT"
-        );
-
-        setCodingData(coding);
-        setDataAI(ai);
-        setSoldData(sold);
-
-      });
+    loadEvents();
 
   },[]);
 
+  return(
 
-  return (
-    <>
-      <Header />
+    <div>
 
-      <SideMenu />
+      {events.map(event => (
 
-      <RightSideMenu />
+        <FuturisticCard
+          key={event.id}
+          id={event.id}
+          title={event.title}
+          price={event.price}
+          image={event.image}
+        />
 
-      <h1 className="main-title">WORKSHOPS</h1>
+      ))}
 
-      <div className="highlights">
-        <div>Professional Certificate</div>
-        <div>Free Techfest Access</div>
-        <div>Internship Growth</div>
-      </div>
+    </div>
 
-      <CategorySection
-        title="Coding Lang"
-        data={codingData}
-      />
-
-      <CategorySection
-        title="AI & DATA"
-        data={dataAI}
-      />
-
-      <CategorySection
-        title="SOLD OUT"
-        data={soldData}
-      />
-
-      <Footer />
-    </>
   );
-}
 
+}
 export default Workshops;

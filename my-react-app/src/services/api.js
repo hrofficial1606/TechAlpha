@@ -1,29 +1,17 @@
 import axios from "axios";
 
-const API = axios.create({
-  baseURL: "http://localhost:8080",
+const api = axios.create({
+  baseURL: "http://localhost:8080"
 });
 
-export const login = (data) => API.post("/auth/login", data);
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
 
-export const register = (data) => API.post("/auth/register", data);
+  if (token) {
+    config.headers.Authorization = "Bearer " + token;
+  }
 
-export const getEvents = () => API.get("/events");
-
-export const registerEvent = (id) =>
-  API.post(`/registration/${id}`);
-
-export const getDashboard = () =>
-  API.get("/admin/dashboard");
-API.interceptors.request.use((req)=>{
-
- const token = localStorage.getItem("token");
-
- if(token){
-   req.headers.Authorization = `Bearer ${token}`;
- }
-  return req;
-
+  return config;
 });
 
-export default API;
+export default api;

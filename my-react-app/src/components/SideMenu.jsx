@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaShoppingCart, FaInfoCircle, FaPhone, FaHandshake } from "react-icons/fa";
+import { FaHome, FaShoppingCart, FaInfoCircle, FaPhone, FaHandshake, FaImage } from "react-icons/fa";
 import "../styles/SideMenu.css";
 
 import { FaInstagram, FaWhatsapp,FaLinkedin } from "react-icons/fa";
@@ -38,6 +38,11 @@ function SideMenu() {
         <li>
           <NavLink to="/dev">
             <FaShoppingCart /> Shop
+          </NavLink>
+        </li>
+         <li>
+          <NavLink to="/dev">
+            <FaImage /> Galary
           </NavLink>
         </li>
         {/* MOBILE SOCIAL LINKS */}

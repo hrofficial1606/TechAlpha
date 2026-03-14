@@ -14,6 +14,9 @@ import WorkshopExplore from "./pages/WorkshopExplore";
 import Accommodation from "./pages/Accommodation";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import VerifyOtp from "./pages/VerifyOtp";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -37,11 +40,22 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/dev" element={<Dev />} />
           <Route path="/acm" element={<Accommodation />} />
           <Route path="/workshops/explore" element={<WorkshopExplore />} />
-          <Route path="/login" element={<Login />} />
-           <Route path="/register" element={<Register />} />
-        
+          
+        <Route path="/register" element={<Register/>}/>
+
+        <Route path="/login" element={<Login/>}/>
+
+        <Route path="/verify" element={<VerifyOtp/>}/>
+
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <h1>Dashboard</h1>
+          </ProtectedRoute>
+        }/>
 
       </Routes>
+
+      
    
        
     </BrowserRouter>
