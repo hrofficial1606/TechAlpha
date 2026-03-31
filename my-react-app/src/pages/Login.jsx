@@ -1,47 +1,98 @@
 import { useState } from "react";
-import api from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { initiateLogin } from "../services/authService";
+import { savePendingAuth } from "../utils/auth";
+import "../styles/Login.css";
 
-function Login(){
-
+function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [form,setForm] = useState({
-    email:"",
-    password:""
+  const [form, setForm] = useState({
+    email: location.state?.email || "",
+    password: "",
   });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const successMessage = location.state?.message || "";
 
-  const handleChange = (e)=>{
-    setForm({...form,[e.target.name]:e.target.value});
+  const redirectTo = location.state?.from?.pathname || "/dashboard";
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setForm((currentForm) => ({ ...currentForm, [name]: value }));
   };
 
-  const handleSubmit = async (e)=>{
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
 
-    const res = await api.post("/auth/login",form);
+    try {
+      await initiateLogin(form);
 
-    localStorage.setItem("token",res.data);
+      const pendingAuth = {
+        email: form.email,
+        mode: "login",
+        redirectTo,
+      };
 
-    alert("Login success");
-
-    navigate("/dashboard");
+      savePendingAuth(pendingAuth);
+      navigate("/verify-otp", { state: pendingAuth });
+    } catch (requestError) {
+      setError(requestError.response?.data?.message || "Unable to send login OTP.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return(
-    <div>
+  return (
+    <div className="login-page">
+      <div className="login-wrapper">
+        <form className="login-card" onSubmit={handleSubmit}>
+          <h2 className="login-title">Login To Continue</h2>
 
-      <h2>Login</h2>
+          <p className="auth-subtitle">
+            Browse freely on TechAlpha. Login is only needed when you open a protected feature.
+          </p>
 
-      <form onSubmit={handleSubmit}>
+          <input
+            className="login-input"
+            name="email"
+            type="email"
+            placeholder="Email"
+            autoComplete="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
 
-        <input name="email" placeholder="Email" onChange={handleChange}/>
+          <input
+            className="login-input"
+            name="password"
+            type="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
 
-        <input name="password" type="password" placeholder="Password" onChange={handleChange}/>
+          {successMessage ? <p className="auth-success">{successMessage}</p> : null}
+          {error ? <p className="auth-error">{error}</p> : null}
 
-        <button type="submit">Login</button>
+          <button className="login-btn" type="submit" disabled={loading}>
+            {loading ? "Sending OTP..." : "Send Login OTP"}
+          </button>
 
-      </form>
-
+          <p className="login-register">
+            New here?
+            <Link className="register-link" to="/register">
+              Create account
+            </Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }

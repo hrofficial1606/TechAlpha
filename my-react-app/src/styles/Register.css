@@ -54,3 +54,10 @@
   margin-left:6px;
   cursor:pointer;
 }
+
+.login-link a{
+  color:#7c3aed;
+  margin-left:6px;
+  cursor:pointer;
+  text-decoration:none;
+}

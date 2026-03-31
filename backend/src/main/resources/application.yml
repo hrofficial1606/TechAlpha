@@ -11,10 +11,10 @@ spring:
   application:
     name: techalfa-auth-backend
   datasource:
-    url: ${DB_URL:jdbc:oracle:thin:@localhost:1521/FREEPDB1}
-    username: ${DB_USERNAME:techalfa}
-    password: ${DB_PASSWORD:techalfa123}
-    driver-class-name: oracle.jdbc.OracleDriver
+    url: ${DB_URL:}
+    username: ${DB_USERNAME:}
+    password: ${DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: ${DB_POOL_MAX:50}
       minimum-idle: ${DB_POOL_MIN:10}
@@ -25,15 +25,15 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.OracleDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: false
     open-in-view: false
   mail:
-    host: ${MAIL_HOST:smtp.gmail.com}
-    port: ${MAIL_PORT:587}
-    username: ${MAIL_USERNAME:your-email@gmail.com}
-    password: ${MAIL_PASSWORD:your-app-password}
+    host: ${MAIL_HOST:}
+    port: ${MAIL_PORT:465}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
     properties:
       mail:
         smtp:
@@ -41,17 +41,33 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
+          ssl:
+            enable: ${MAIL_SSL_ENABLE:true}
           starttls:
-            enable: true
+            enable: ${MAIL_STARTTLS_ENABLE:false}
 
 app:
   jwt:
-    secret: ${JWT_SECRET:VGhpcy1pcy1hLWxvbmctYmFzZTY0LWVuY29kZWQtc2VjcmV0LWtleS1mb3ItdGVjaGFsZmEtYXV0aA==}
+    secret: ${JWT_SECRET:}
     expiration-minutes: ${JWT_EXPIRATION_MINUTES:120}
   otp:
     length: 6
     expiration-minutes: 10
   mail:
-    from-address: ${MAIL_FROM:your-email@gmail.com}
+    from-address: ${MAIL_FROM:}
   cors:
     allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}
+  paypal:
+    enabled: ${PAYPAL_ENABLED:false}
+    client-id: ${PAYPAL_CLIENT_ID:}
+    client-secret: ${PAYPAL_CLIENT_SECRET:}
+    base-url: ${PAYPAL_BASE_URL:https://api-m.sandbox.paypal.com}
+    return-url: ${PAYPAL_RETURN_URL:http://localhost:5173/payment/success}
+    cancel-url: ${PAYPAL_CANCEL_URL:http://localhost:5173/payment/cancel}
+  admin:
+    email: ${ADMIN_EMAIL:widesoftech@gmail.com}
+  cloudinary:
+    cloud-name: ${CLOUDINARY_CLOUD_NAME:}
+    api-key: ${CLOUDINARY_API_KEY:}
+    api-secret: ${CLOUDINARY_API_SECRET:}
+    default-folder: ${CLOUDINARY_DEFAULT_FOLDER:techalfa}

@@ -8,6 +8,7 @@ import { GiTrophy } from "react-icons/gi";
 import { FaHome } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
+import { getStoredUser } from "../utils/auth";
 
 function Header() {
 
@@ -15,6 +16,7 @@ function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const [userName, setUserName] = useState(null);
+  const [userAvatar, setUserAvatar] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,14 +24,11 @@ function Header() {
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
-
-    const name = localStorage.getItem("name");
-
-    if (name) {
-      setUserName(name);
-    }
-
-  }, []);
+    const user = getStoredUser();
+    const firstName = user?.fullName?.trim()?.split(/\s+/)[0] || null;
+    setUserName(firstName);
+    setUserAvatar(user?.profileImage || null);
+  }, [location.pathname]);
 
   useEffect(() => {
 
@@ -54,17 +53,6 @@ function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
 
   }, [lastScrollY]);
-
-  const logout = () => {
-
-    localStorage.removeItem("token");
-    localStorage.removeItem("name");
-
-    setUserName(null);
-
-    navigate("/");
-
-  };
 
   return (
     <div className="top-header">
@@ -100,6 +88,7 @@ function Header() {
       <div className="nav-links">
         <NavLink to="/acm">ACCOMMODATION</NavLink>
         <NavLink to="/workshops">WORKSHOPS</NavLink>
+        <NavLink to="/gallery">GALLERY</NavLink>
         <NavLink to="/hackthons">HACKATHON</NavLink>
       </div>
 
@@ -118,6 +107,10 @@ function Header() {
           <GrWorkshop /> WORKSHOPS
         </NavLink>
 
+        <NavLink to="/gallery">
+          Gallery
+        </NavLink>
+
         <NavLink to="/hackthons">
           <GiTrophy /> HACKATHON
         </NavLink>
@@ -128,8 +121,9 @@ function Header() {
 
       {userName ? (
 
-        <button className="signin-btn" onClick={logout}>
-          Hello, {userName} | Logout
+        <button className="signin-btn user-greeting-btn" onClick={() => navigate("/profile")}>
+          {userAvatar ? <img src={userAvatar} alt={userName || "Profile"} className="header-avatar" /> : null}
+          Hi, {userName}
         </button>
 
       ) : (

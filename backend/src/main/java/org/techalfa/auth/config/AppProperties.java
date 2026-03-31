@@ -7,7 +7,10 @@ public record AppProperties(
         Jwt jwt,
         Otp otp,
         Mail mail,
-        Cors cors
+        Cors cors,
+        Paypal paypal,
+        Admin admin,
+        Cloudinary cloudinary
 ) {
     public record Jwt(String secret, long expirationMinutes) {
     }
@@ -19,5 +22,26 @@ public record AppProperties(
     }
 
     public record Cors(String allowedOrigins) {
+    }
+
+    public record Paypal(
+            boolean enabled,
+            String clientId,
+            String clientSecret,
+            String baseUrl,
+            String returnUrl,
+            String cancelUrl
+    ) {
+    }
+
+    public record Admin(String email) {
+    }
+
+    public record Cloudinary(
+            String cloudName,
+            String apiKey,
+            String apiSecret,
+            String defaultFolder
+    ) {
     }
 }

@@ -1,111 +1,148 @@
 .prizes-section {
   text-align: center;
-  padding: 80px 20px;
+  padding: 5rem 1.25rem;
   color: white;
 }
 
-/* Title */
-
 .prizes-title {
-  font-size: 42px;
-  margin-bottom: 10px;
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  letter-spacing: 0.2rem;
+  margin-bottom: 0.75rem;
 }
 
 .prizes-subtitle {
-  opacity: 0.8;
-  margin-bottom: 25px;
+  max-width: 620px;
+  margin: 0 auto 1.6rem;
+  opacity: 0.84;
+  line-height: 1.7;
 }
 
-/* Total Prize */
-
 .total-prize {
-  font-size: 42px;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: bold;
-  background: linear-gradient(90deg,#ffcc00,#ffaa00);
+  background: linear-gradient(90deg, #ffe8a3, #ffbb70);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .total-label {
-  margin-bottom: 50px;
-  opacity: 0.8;
+  margin-bottom: 2.5rem;
+  opacity: 0.78;
+  letter-spacing: 0.08rem;
 }
-
-/* Cards Container */
 
 .prize-cards {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 1.5rem;
   flex-wrap: wrap;
 }
 
-/* Card Base */
-
 .prize-card {
-  width: 300px;
-  padding: 30px;
-  border-radius: 18px;
-
-  backdrop-filter: blur(12px);
-  background: rgba(30, 20, 60, 0.4);
-
-  transition: 0.3s ease;
+  width: min(300px, calc(100vw - 2rem));
   position: relative;
+  overflow: hidden;
+  padding: 1.8rem;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05)),
+    radial-gradient(circle at top left, rgba(208, 180, 255, 0.12), transparent 40%);
+  backdrop-filter: blur(22px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 24px 56px rgba(7, 5, 19, 0.34);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
 }
 
-/* Hover Glow */
+.prize-card::before {
+  content: "";
+  position: absolute;
+  inset: -35% auto auto -120%;
+  width: 72%;
+  height: 185%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 35%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.04) 65%,
+    transparent 100%
+  );
+  transform: rotate(18deg);
+  opacity: 0;
+  transition: transform 0.7s ease, opacity 0.45s ease;
+  pointer-events: none;
+}
 
 .prize-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 0 30px rgba(255,255,255,0.15);
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 28px 60px rgba(7, 5, 19, 0.44),
+    0 0 42px rgba(167, 112, 255, 0.18);
 }
 
-/* Amount Row */
+.prize-card:hover::before {
+  opacity: 1;
+  transform: translateX(240%) rotate(18deg);
+}
 
 .amount-row {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-
-  font-size: 26px;
-  margin: 15px 0;
+  gap: 0.7rem;
+  font-size: 1.6rem;
+  margin: 1rem 0;
 }
 
 .emoji {
-  font-size: 28px;
+  font-size: 1.35rem;
+  letter-spacing: 0.06rem;
 }
 
 .amount {
-  font-weight: bold;
+  font-weight: 700;
 }
-
-/* Winner Placeholder */
 
 .winner-placeholder {
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.1);
-  font-size: 14px;
-  opacity: 0.8;
+  margin-top: 1.2rem;
+  padding: 0.95rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.95rem;
+  opacity: 0.9;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-/* Gradient Borders */
+.prize-card:hover .winner-placeholder {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
 
 .gold {
-  border: 2px solid #ffcc00;
-  box-shadow: 0 0 20px rgba(255,204,0,0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 24px 56px rgba(7, 5, 19, 0.34),
+    0 0 28px rgba(255, 204, 0, 0.12);
 }
 
 .silver {
-  border: 2px solid #c0c0c0;
-  box-shadow: 0 0 20px rgba(200,200,200,0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 24px 56px rgba(7, 5, 19, 0.34),
+    0 0 28px rgba(210, 210, 220, 0.12);
 }
 
 .bronze {
-  border: 2px solid #cd7f32;
-  box-shadow: 0 0 20px rgba(205,127,50,0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 24px 56px rgba(7, 5, 19, 0.34),
+    0 0 28px rgba(205, 127, 50, 0.12);
 }
-

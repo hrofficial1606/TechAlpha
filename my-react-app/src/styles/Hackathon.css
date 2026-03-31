@@ -1,202 +1,250 @@
-/* ===============================
-   HERO BACKGROUND SECTION
-================================ */
-
-.hero-section {
-
-  background-size: 250vh 150vh;
-  height: 100vh;
-  background-position: top;
-  background-repeat: no-repeat;
-
-  display:block;
-  justify-content: center;
-  align-items: center;
-
-  position: relative;
-  
+.app-container {
+  background:
+    radial-gradient(circle at top, rgba(101, 41, 183, 0.42), rgba(11, 6, 28, 0.96) 42%),
+    linear-gradient(180deg, rgba(6, 7, 18, 0.96), rgba(9, 5, 20, 0.98)),
+    #070611;
+  color: white;
 }
 
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+}
 
-/* DARK OVERLAY FOR TEXT READABILITY */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(186, 140, 255, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(4, 3, 12, 0.18), rgba(5, 3, 13, 0.72));
+  pointer-events: none;
+}
 
 .hero-overlay {
-  width: 100%;
-  height: 100%;
-
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.30),
-    rgba(10, 0, 25, 0.30)
-  );
-
+  width: min(980px, calc(100% - 2rem));
+  margin: auto;
+  padding: 8rem 2.25rem 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   text-align: center;
-  
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 36px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(22px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 28px 70px rgba(5, 4, 14, 0.46),
+    0 0 52px rgba(130, 77, 245, 0.16);
 }
 
-
-/* HERO TEXT */
-
 .hero-title {
-  font-size: 60px;
-  letter-spacing: 4px;
-
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  letter-spacing: 0.28rem;
   color: #fff;
-
   text-shadow:
-    0 0 20px #a100ff,
-    0 0 40px #a100ff;
+    0 0 24px rgba(186, 140, 255, 0.45),
+    0 0 56px rgba(130, 77, 245, 0.28);
 }
 
 .hero-subtitle {
-  font-size: 18px;
-  margin-top: 10px;
-
-  color: #ddd;
+  margin-top: 1rem;
+  max-width: 760px;
+  font-size: 1.06rem;
+  line-height: 1.7;
+  color: rgba(241, 236, 255, 0.84);
 }
-
-
-
-
-/* ===============================
-   GLOBAL BACKGROUND
-================================ */
-
-.app-container {
-  background: radial-gradient(circle at top, #3a0a6a, #150026);
-  color: white;
-}
-
-
-
-
-/* ===============================
-   SECTION STYLE
-================================ */
 
 .section {
-  padding: 80px 20px;
+  padding: 5rem 1.25rem;
   text-align: center;
 }
 
 .section-title {
-  font-size: 42px;
-  letter-spacing: 3px;
-  margin-bottom: 30px;
-
+  margin-bottom: 2rem;
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  letter-spacing: 0.22rem;
   text-shadow:
-    0 0 10px #a100ff,
-    0 0 20px #a100ff;
+    0 0 18px rgba(168, 85, 247, 0.28),
+    0 0 32px rgba(168, 85, 247, 0.18);
 }
 
-
-/* ===============================
-   GLASS CARD
-================================ */
+.glass-card,
+.hackathon-contact-card {
+  width: min(900px, calc(100% - 2rem));
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04)),
+    radial-gradient(circle at top left, rgba(197, 163, 255, 0.14), transparent 38%);
+  backdrop-filter: blur(24px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 24px 60px rgba(8, 5, 22, 0.42),
+    0 0 42px rgba(140, 82, 255, 0.14);
+  font-size: 1rem;
+  line-height: 1.7;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease,
+    background 0.4s ease;
+}
 
 .glass-card {
-  width: 80%;
-  max-width: 900px;
-  margin: auto;
-
-  background: rgba(110, 0, 200, 0.25);
-  border: 1px solid rgba(180, 100, 255, 0.4);
-
-  padding: 18px 22px;
-
-  border-radius: 16px;
-  backdrop-filter: blur(14px);
-
-  font-size: 15px;
-  line-height: 1.4;
-
-  box-shadow:
-    0 0 15px rgba(170, 0, 255, 0.5),
-    0 0 30px rgba(170, 0, 255, 0.3);
-
-  transition: 0.4s ease;
+  padding: 1.6rem 1.9rem;
 }
 
-.glass-card:hover {
-  box-shadow:
-    0 0 25px rgba(200, 0, 255, 0.8),
-    0 0 50px rgba(200, 0, 255, 0.6),
-    0 0 80px rgba(200, 0, 255, 0.4);
-
-  transform: scale(1.02);
+.glass-card::before,
+.hackathon-contact-card::before {
+  content: "";
+  position: absolute;
+  inset: -30% auto auto -120%;
+  width: 70%;
+  height: 180%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 35%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.04) 65%,
+    transparent 100%
+  );
+  transform: rotate(18deg);
+  opacity: 0;
+  transition: transform 0.7s ease, opacity 0.45s ease;
+  pointer-events: none;
 }
 
+.glass-card:hover,
+.hackathon-contact-card:hover {
+  transform: translateY(-10px) scale(1.01);
+  border-color: rgba(220, 195, 255, 0.32);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06)),
+    radial-gradient(circle at top left, rgba(214, 179, 255, 0.22), transparent 42%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 34px 78px rgba(8, 5, 22, 0.56),
+    0 0 56px rgba(140, 82, 255, 0.26);
+}
 
-/* ===============================
-   IMAGE SECTION
-================================ */
+.glass-card:hover::before,
+.hackathon-contact-card:hover::before {
+  opacity: 0.95;
+  transform: translateX(240%) rotate(18deg);
+}
+
+.glass-card h2,
+.glass-card h3,
+.glass-card h4 {
+  letter-spacing: 0.12rem;
+}
 
 .img-div {
   display: flex;
   justify-content: center;
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
+}
+
+.card-img,
+.card-img1 {
+  transition: transform 0.45s ease, box-shadow 0.45s ease, filter 0.45s ease;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 20px 48px rgba(9, 7, 24, 0.34),
+    0 0 28px rgba(255, 255, 255, 0.12);
 }
 
 .card-img {
-  width: 200px;
-  filter: drop-shadow(0 0 15px #ffffff);
+  width: min(220px, 70vw);
 }
 
 .card-img1 {
-  width: 300px;
-  filter: drop-shadow(0 0 15px #ffffff);
+  width: min(320px, 78vw);
 }
 
-
-/* ===============================
-   CONTACT GRID
-================================ */
+.img-div:hover .card-img,
+.img-div:hover .card-img1 {
+  transform: translateY(-6px) scale(1.03);
+  filter: saturate(1.08) brightness(1.05);
+  box-shadow:
+    0 26px 58px rgba(9, 7, 24, 0.42),
+    0 0 36px rgba(201, 173, 255, 0.2);
+}
 
 .hackathon-contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 900px;
-  margin: auto;
-  
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto;
 }
 
 .hackathon-contact-card {
-  background: rgba(110, 0, 200, 0.25);
-  border-radius: 15px;
-  padding: 20px;
-
-  box-shadow: 0 0 20px rgba(160, 0, 255, 0.4);
+  width: auto;
+  padding: 1.5rem;
 }
 
+.hackathon-contact-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.12rem;
+}
 
-/* ===============================
-   FLOATING ANIMATION
-================================ */
+.hackathon-contact-card p,
+.contact-link {
+  color: rgba(241, 236, 255, 0.84);
+  text-decoration: none;
+}
+
+.hack-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.hack-card li {
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.hack-card li:hover {
+  transform: translateX(6px);
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(214, 179, 255, 0.22);
+}
 
 .floating-card {
-  animation: floatCard 6s ease-in-out infinite;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
-
-@keyframes floatCard {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0); }
-}
-
-
-/* ===============================
-   SCROLL REVEAL
-================================ */
 
 .reveal {
   opacity: 0;
-  transform: translateY(50px);
-  transition: all 1s ease;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
 .reveal.active {
@@ -204,67 +252,49 @@
   transform: translateY(0);
 }
 
-
-/* ===============================
-   FOOTER
-================================ */
-
 footer {
-  padding: 50px 20px;
-  background: #0b0015;
+  padding: 3.2rem 1.25rem;
+  background: rgba(8, 5, 20, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .section-footer {
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  gap: 1.25rem;
   text-align: center;
-  margin-bottom: 20px;
 }
-
-
-
-
-/* ===============================
-   QR REGISTER SECTION
-================================ */
 
 .qr-container {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  gap: 30px;
-
-  padding: 25px;
-
-  max-width: 700px;
+  gap: 1.8rem;
+  padding: 1.8rem;
+  max-width: 760px;
   margin: auto;
 }
 
 .qr-img {
   width: 160px;
   height: 160px;
-
-  border-radius: 12px;
-
+  border-radius: 20px;
   background: white;
-  padding: 8px;
-
-  box-shadow:
-    0 0 20px rgba(160, 0, 255, 0.6);
+  padding: 0.55rem;
+  box-shadow: 0 16px 34px rgba(136, 81, 255, 0.22);
 }
 
 .qr-text h3 {
-  font-size: 22px;
-  margin-bottom: 8px;
-
-  color: #c77dff;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #dfc8ff;
 }
 
 .qr-text p {
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 0.98rem;
+  line-height: 1.6;
 }
 
 .qr-note {
@@ -273,62 +303,47 @@ footer {
   margin-top: 6px;
 }
 
-
-/* ================= MOBILE SIZE & FIT FIX ================= */
-
 @media (max-width: 768px) {
-
-  /* ===== HERO SECTION FIX ===== */
-
- .hero-section {
-  height: auto;
-  min-height: 70vh;             /* Banner style height */
-
-  background-size: contain;    /* SHOW FULL BANNER */
-  background-repeat: no-repeat;
-  background-position: top center;
-
-  padding-top: 220px;          /* Space for banner image */
-  /*padding-bottom: 40px;*/
-}
-
+  .hero-section {
+    min-height: 72vh;
+    background-size: cover;
+    background-position: center top;
+  }
 
   .hero-overlay {
-    padding: 30px 10px;
+    width: min(100% - 1.25rem, 100%);
+    padding: 6.5rem 1.2rem 2.2rem;
+    border-radius: 26px;
   }
 
   .hero-title {
-    font-size: 30px;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.12rem;
   }
-
-  .hero-subtitle {
-    font-size: 14px;
-  }
-
-  /* ===== SECTION FIX ===== */
 
   .section {
-    padding: 50px 12px;
+    padding: 3.5rem 0.9rem;
   }
 
-  .section-title {
-    font-size: 26px;
+  .glass-card,
+  .hackathon-contact-card {
+    width: min(100% - 1rem, 100%);
+    border-radius: 22px;
   }
 
-  /* ===== GLASS CARD FIX ===== */
-
-  .glass-card {
-    width: 95%;
-    font-size: 14px;
-    padding: 15px;
+  .glass-card,
+  .hackathon-contact-card,
+  .qr-container {
+    padding: 1.2rem;
   }
 
-  /* ===== IMAGE FIX ===== */
+  .hackathon-contact-grid {
+    width: min(100% - 1rem, 100%);
+    grid-template-columns: 1fr;
+  }
 
-  .img-div {
+  .qr-container {
     flex-direction: column;
-    align-items: center;
+    gap: 1rem;
   }
 
   .card-img {
@@ -336,46 +351,6 @@ footer {
   }
 
   .card-img1 {
-    width: 200px;
+    width: 210px;
   }
-
-  /* ===== CONTACT GRID FIX ===== */
-
-  .hackathon-contact-grid {
-    grid-template-columns: 1fr;
-    padding: 0 10px;
-  }
-
-  /* ===== FOOTER FIX ===== */
-
-  footer {
-    padding: 35px 12px;
-  }
-
-  /* ===== QR SECTION FIX ===== */
-
-  .qr-container {
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px;
-  }
-
-  .qr-img {
-    width: 130px;
-    height: 130px;
-  }
-
-  .qr-text h3 {
-    font-size: 18px;
-  }
-
-  .qr-text p {
-    font-size: 13px;
-  }
-  .hero-overlay {
-  justify-content: flex-end;
-  padding-bottom: 30px;
-}
-
-
 }

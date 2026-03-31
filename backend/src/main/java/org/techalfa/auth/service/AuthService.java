@@ -10,6 +10,7 @@ import org.techalfa.auth.dto.LoginInitiateRequest;
 import org.techalfa.auth.dto.OtpVerificationRequest;
 import org.techalfa.auth.dto.RegisterRequest;
 import org.techalfa.auth.dto.UserProfileResponse;
+import org.techalfa.auth.config.AppProperties;
 import org.techalfa.auth.entity.OtpPurpose;
 import org.techalfa.auth.entity.RoleName;
 import org.techalfa.auth.entity.UserAccount;
@@ -27,6 +28,7 @@ public class AuthService {
     private final OtpService otpService;
     private final MailService mailService;
     private final JwtService jwtService;
+    private final AppProperties properties;
 
     @Transactional
     public void initiateRegistration(RegisterRequest request) {
@@ -42,7 +44,7 @@ public class AuthService {
         user.setEmail(normalizedEmail);
         user.setPasswordHash(passwordEncoder.encode(request.password()));
         user.setEmailVerified(false);
-        user.setRoleName(RoleName.USER);
+        user.setRoleName(resolveRoleForEmail(normalizedEmail));
         UserAccount savedUser = userAccountRepository.save(user);
 
         UserOtp otp = otpService.createOtp(savedUser, OtpPurpose.REGISTRATION);
@@ -97,5 +99,13 @@ public class AuthService {
     private UserAccount findUser(String email) {
         return userAccountRepository.findByEmailIgnoreCase(email.trim().toLowerCase())
                 .orElseThrow(() -> new BadCredentialsException("User not found."));
+    }
+
+    private RoleName resolveRoleForEmail(String email) {
+        String adminEmail = properties.admin().email();
+        if (adminEmail != null && !adminEmail.isBlank() && adminEmail.equalsIgnoreCase(email)) {
+            return RoleName.ADMIN;
+        }
+        return RoleName.USER;
     }
 }

@@ -1,192 +1,151 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import "../styles/WorkshopExplore.css";
-import API from "../services/api";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import SideMenu from "../components/SideMenu";
 import RightSideMenu from "../components/RightSideMenu";
-
-import qrImg from "../assets/Webinar-QR.jpeg";
+import { getEvent } from "../services/eventService";
+import { createPayPalOrder } from "../services/ticketService";
+import { isAuthenticated } from "../utils/auth";
+import "../styles/FeaturePages.css";
 
 function WorkshopExplore() {
-
-  const location = useLocation();
+  const { eventId } = useParams();
   const navigate = useNavigate();
+  const [event, setEvent] = useState(null);
+  const [error, setError] = useState("");
+  const [paying, setPaying] = useState(false);
 
-  const workshop = location.state;
+  useEffect(() => {
+    const loadEvent = async () => {
+      try {
+        setEvent(await getEvent(eventId));
+      } catch (requestError) {
+        setError(requestError.response?.data?.message || "Unable to load this event.");
+      }
+    };
 
-  if (!workshop) {
+    loadEvent();
+  }, [eventId]);
+
+  const openBrochure = () => {
+    if (event?.brochureUrl) {
+      window.open(event.brochureUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+    setError("Brochure is not available for this event yet.");
+  };
+
+  const startCheckout = async () => {
+    if (!isAuthenticated()) {
+      navigate("/login", { state: { from: { pathname: `/workshops/${eventId}` } } });
+      return;
+    }
+
+    try {
+      setPaying(true);
+      setError("");
+      const order = await createPayPalOrder(eventId);
+      window.location.href = order.approvalUrl;
+    } catch (requestError) {
+      setError(requestError.response?.data?.message || "Unable to start PayPal checkout.");
+    } finally {
+      setPaying(false);
+    }
+  };
+
+  if (!event) {
     return (
-      <h2 style={{ color: "white", textAlign: "center" }}>
-        No Workshop Selected
-      </h2>
+      <div className="feature-shell">
+        <Header />
+        <SideMenu />
+        <RightSideMenu />
+        <div className="feature-stage">
+          <div className="glass-card empty-state">
+            <p className="feature-copy">{error || "Loading event..."}</p>
+          </div>
+        </div>
+      </div>
     );
   }
 
-  const checkLogin = () => {
-
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      alert("Please login first");
-      navigate("/login");
-      return false;
-    }
-
-    return true;
-  };
-
-  const openPdf = () => {
-
-    if (workshop.pdf) {
-      window.open(workshop.pdf, "_blank");
-    } else {
-      alert("PDF not available");
-    }
-
-  };
-
-const openForm = async () => {
-
-  const token = localStorage.getItem("token");
-
-  if (!token) {
-    alert("Please login first");
-    navigate("/login");
-    return;
-  }
-
-  try {
-
-    const res = await API.post(`/registration/${workshop.id}`);
-
-    alert("Registration Successful!");
-
-  } catch (err) {
-
-    alert("Registration failed");
-
-  }
-
-};
-
   return (
-    <div className="explore-page">
-
+    <div className="feature-shell">
       <Header />
       <SideMenu />
       <RightSideMenu />
 
-      <div className="explore-container">
-
-        {/* LEFT IMAGE */}
-        <div className="workshop-card">
-
-          <img src={workshop.image} alt={workshop.title} />
-
-          <div className="workshop-btns">
-
-            <button
-              className="btn-primary"
-              onClick={openForm}
-            >
-              Register
-            </button>
-
-            <button
-              className="btn-secondary"
-              onClick={openPdf}
-            >
-              Content
-            </button>
-
-          </div>
-
+      <div className="feature-stage">
+        <div className="feature-hero">
+          <div className="feature-kicker">EVENT DETAIL</div>
+          <h1 className="feature-title">{event.title}</h1>
+          <p className="feature-copy">
+            Dive into the full event details, then move into checkout only when you are ready.
+          </p>
         </div>
 
-        {/* RIGHT DETAILS */}
-        <div className="workshop-details">
+        <div className="detail-grid">
+          <section className="glass-card">
+            <img className="detail-media" src={event.imageUrl} alt={event.title} />
 
-          <div className="workshop-header">
-
-            <h1>{workshop.title}</h1>
-
-            <div className="price-tag">
-              ₹{workshop.price}
-              <span> ₹{workshop.oldPrice}</span>
+            <div className="event-actions" style={{ marginTop: "20px" }}>
+              <button className="glass-btn" onClick={startCheckout} disabled={paying}>
+                {paying ? "Redirecting..." : "Pay With PayPal"}
+              </button>
+              <button className="ghost-btn" onClick={openBrochure}>
+                View Brochure
+              </button>
             </div>
 
-          </div>
+            <div className="feature-note">
+              <div className="mini-badge">{event.category}</div>
+              <div className="detail-price">
+                Rs. {event.price}
+                {event.oldPrice ? <span>Rs. {event.oldPrice}</span> : null}
+              </div>
+            </div>
+          </section>
 
-          <div className="details-box">
+          <section className="glass-card">
+            <h2>Event Overview</h2>
+            <p className="feature-copy">{event.description}</p>
 
-            <h4>Workshop Benefits</h4>
-
-            <p>
-              Hands-on sessions, certification, real projects and
-              industry mentorship.
-            </p>
-
-            <div className="info-grid">
-
-              <div>
+            <div className="detail-info-grid">
+              <div className="detail-info-card">
                 <h5>Category</h5>
-                <p>{workshop.tag}</p>
+                <p>{event.category}</p>
               </div>
-
-              <div>
+              <div className="detail-info-card">
                 <h5>Venue</h5>
-                <p>Hybrid Mode</p>
+                <p>{event.venue}</p>
               </div>
-
-              <div>
-                <h5>Duration</h5>
-                <p>12–16 Hours</p>
+              <div className="detail-info-card">
+                <h5>Starts</h5>
+                <p>{new Date(event.startsAt).toLocaleString()}</p>
               </div>
-
+              {event.endsAt ? (
+                <div className="detail-info-card">
+                  <h5>Ends</h5>
+                  <p>{new Date(event.endsAt).toLocaleString()}</p>
+                </div>
+              ) : null}
             </div>
 
-          </div>
+            {event.highlightText ? (
+              <div className="feature-note" style={{ color: "#bde8ff" }}>
+                <strong>Highlight:</strong> {event.highlightText}
+              </div>
+            ) : null}
 
+            {event.certificateEnabled ? (
+              <div className="feature-note" style={{ color: "#8af0c4" }}>
+                Attendance certificates are enabled for this event.
+              </div>
+            ) : null}
+
+            {error ? <p className="auth-error" style={{ marginTop: "1rem" }}>{error}</p> : null}
+          </section>
         </div>
-
       </div>
-
-      {/* SCAN TO REGISTER */}
-      <section className="section">
-
-        <h2 className="section-title">
-          SCAN TO REGISTER
-        </h2>
-
-        <div className="qr-container">
-
-          <img
-            src={qrImg}
-            alt="Scan QR"
-            className="qr-img"
-            onClick={openForm}
-          />
-
-          <div className="qr-text">
-
-            <h3>Scan & Register</h3>
-
-            <p>
-              Scan this QR code or click to instantly register
-              for TechAlpha Workshop.
-            </p>
-
-            <p className="qr-note">
-              Limited seats available 🚀
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
-
     </div>
   );
 }

@@ -1,42 +1,102 @@
 import { useState } from "react";
-import api from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { initiateRegistration } from "../services/authService";
+import { savePendingAuth } from "../utils/auth";
+import "../styles/Register.css";
 
 function Register() {
-
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    name: "",
+    fullName: "",
     email: "",
-    password: ""
+    password: "",
   });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value});
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setForm((currentForm) => ({ ...currentForm, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
 
-    await api.post("/auth/register", form);
+    try {
+      await initiateRegistration(form);
 
-    alert("OTP sent to email");
+      const pendingAuth = {
+        email: form.email,
+        mode: "register",
+      };
 
-    navigate("/verify");
+      savePendingAuth(pendingAuth);
+      navigate("/verify-otp", { state: pendingAuth });
+    } catch (requestError) {
+      setError(requestError.response?.data?.message || "Unable to register right now.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div>
-      <h2>Register</h2>
+    <div className="register-page">
+      <div className="register-wrapper">
+        <form className="register-card" onSubmit={handleSubmit}>
+          <h2 className="register-title">Create Your Account</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" onChange={handleChange}/>
-        <input name="email" placeholder="Email" onChange={handleChange}/>
-        <input name="password" type="password" placeholder="Password" onChange={handleChange}/>
+          <p className="auth-subtitle">
+            Register once, verify your email OTP, and then login whenever you use a protected action.
+          </p>
 
-        <button type="submit">Register</button>
-      </form>
+          <input
+            className="register-input"
+            name="fullName"
+            type="text"
+            placeholder="Full name"
+            autoComplete="name"
+            value={form.fullName}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            className="register-input"
+            name="email"
+            type="email"
+            placeholder="Email"
+            autoComplete="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            className="register-input"
+            name="password"
+            type="password"
+            placeholder="Password"
+            autoComplete="new-password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+
+          {error ? <p className="auth-error">{error}</p> : null}
+
+          <button className="register-btn" type="submit" disabled={loading}>
+            {loading ? "Sending OTP..." : "Register With OTP"}
+          </button>
+
+          <p className="login-link">
+            Already have an account?
+            <Link to="/login">Login</Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 }
