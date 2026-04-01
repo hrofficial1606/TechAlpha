@@ -2,53 +2,28 @@ package org.techalfa.auth.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.BadCredentialsException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.techalfa.auth.dto.UserDashboardResponse;
-import org.techalfa.auth.dto.UserProfileResponse;
 import org.techalfa.auth.config.AppProperties;
 import org.techalfa.auth.entity.RoleName;
 import org.techalfa.auth.entity.UserAccount;
 import org.techalfa.auth.repository.UserAccountRepository;
-import org.techalfa.auth.security.AuthenticatedUser;
-
-import java.util.List;
-import java.util.Map;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class DemoAccountService {
-    private static final DemoSeed PRIMARY_ADMIN = new DemoSeed(
-            "Widesoftech Admin",
-            "widesoftech@gmail.com",
-            "Widesoftech@2026",
-            RoleName.ADMIN
-    );
-
     private final UserAccountRepository userAccountRepository;
     private final PasswordEncoder passwordEncoder;
     private final AppProperties properties;
 
     @PostConstruct
     @Transactional
-    public void ensureDemoAccounts() {
+    public void ensureAdminAccount() {
         enforceSingleAdmin();
-        saveSeed(PRIMARY_ADMIN);
-    }
-
-    private void saveSeed(DemoSeed seed) {
-        UserAccount user = userAccountRepository.findByEmailIgnoreCase(seed.email())
-                .orElseGet(UserAccount::new);
-
-        user.setFullName(seed.fullName());
-        user.setEmail(seed.email());
-        user.setPasswordHash(passwordEncoder.encode(seed.password()));
-        user.setEmailVerified(true);
-        user.setRoleName(seed.roleName());
-
-        userAccountRepository.save(user);
+        ensurePrimaryAdmin();
     }
 
     private void enforceSingleAdmin() {
@@ -69,6 +44,44 @@ public class DemoAccountService {
         });
     }
 
-    private record DemoSeed(String fullName, String email, String password, RoleName roleName) {
+    private void ensurePrimaryAdmin() {
+        AppProperties.Admin admin = properties.admin();
+        if (admin == null || admin.email() == null || admin.email().isBlank()) {
+            return;
+        }
+
+        userAccountRepository.findByEmailIgnoreCase(admin.email())
+                .ifPresentOrElse(this::promoteExistingAdmin, () -> createAdminIfConfigured(admin));
+    }
+
+    private void promoteExistingAdmin(UserAccount user) {
+        if (user.getRoleName() != RoleName.ADMIN || !user.isEmailVerified()) {
+            user.setRoleName(RoleName.ADMIN);
+            user.setEmailVerified(true);
+            userAccountRepository.save(user);
+        }
+    }
+
+    private void createAdminIfConfigured(AppProperties.Admin admin) {
+        String initialPassword = admin.initialPassword();
+        if (initialPassword == null || initialPassword.isBlank()) {
+            log.warn("Admin account {} was not created because ADMIN_INITIAL_PASSWORD is not set.", admin.email());
+            return;
+        }
+
+        UserAccount user = new UserAccount();
+        user.setFullName(resolveAdminName(admin));
+        user.setEmail(admin.email());
+        user.setPasswordHash(passwordEncoder.encode(initialPassword));
+        user.setEmailVerified(true);
+        user.setRoleName(RoleName.ADMIN);
+        userAccountRepository.save(user);
+    }
+
+    private String resolveAdminName(AppProperties.Admin admin) {
+        if (admin.fullName() != null && !admin.fullName().isBlank()) {
+            return admin.fullName();
+        }
+        return "TechAlpha Admin";
     }
 }

@@ -56,16 +56,18 @@ app:
   mail:
     from-address: ${MAIL_FROM:}
   cors:
-    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:}
   paypal:
     enabled: ${PAYPAL_ENABLED:false}
     client-id: ${PAYPAL_CLIENT_ID:}
     client-secret: ${PAYPAL_CLIENT_SECRET:}
     base-url: ${PAYPAL_BASE_URL:https://api-m.sandbox.paypal.com}
-    return-url: ${PAYPAL_RETURN_URL:http://localhost:5173/payment/success}
-    cancel-url: ${PAYPAL_CANCEL_URL:http://localhost:5173/payment/cancel}
+    return-url: ${PAYPAL_RETURN_URL:https://techalfa.org/payment/success}
+    cancel-url: ${PAYPAL_CANCEL_URL:https://techalfa.org/payment/cancel}
   admin:
     email: ${ADMIN_EMAIL:widesoftech@gmail.com}
+    initial-password: ${ADMIN_INITIAL_PASSWORD:}
+    full-name: ${ADMIN_FULL_NAME:TechAlpha Admin}
   cloudinary:
     cloud-name: ${CLOUDINARY_CLOUD_NAME:}
     api-key: ${CLOUDINARY_API_KEY:}

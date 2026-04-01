@@ -21,5 +21,5 @@ export async function capturePayPalOrder(orderId) {
 }
 
 export function getQrImageUrl(registrationId) {
-  return `${import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api"}/secure/user/registrations/${registrationId}/qr-image`;
+  return `${import.meta.env.VITE_API_BASE_URL || "/api"}/secure/user/registrations/${registrationId}/qr-image`;
 }

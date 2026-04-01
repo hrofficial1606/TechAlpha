@@ -24,6 +24,8 @@ Required for startup:
 
 Optional but recommended:
 - `ADMIN_EMAIL`
+- `ADMIN_INITIAL_PASSWORD`
+- `ADMIN_FULL_NAME`
 - `PAYPAL_ENABLED`
 - `PAYPAL_CLIENT_ID`
 - `PAYPAL_CLIENT_SECRET`
@@ -35,6 +37,12 @@ Optional but recommended:
 - `CLOUDINARY_API_SECRET`
 - `CLOUDINARY_DEFAULT_FOLDER`
 - `CORS_ALLOWED_ORIGINS`
+
+Notes:
+- `ADMIN_INITIAL_PASSWORD` is only used to create the admin if that account does not exist yet.
+- After the admin is created, restarts will not overwrite the stored password.
+- For `techalfa.org`, set `CORS_ALLOWED_ORIGINS=https://techalfa.org,https://www.techalfa.org`
+- For production PayPal redirects, set URLs under your real domain instead of localhost
 
 ## Local Run
 

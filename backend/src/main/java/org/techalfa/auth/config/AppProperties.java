@@ -34,7 +34,7 @@ public record AppProperties(
     ) {
     }
 
-    public record Admin(String email) {
+    public record Admin(String email, String initialPassword, String fullName) {
     }
 
     public record Cloudinary(
