@@ -1,4 +1,4 @@
-import "../styles/timeline.css";
+import "../styles/Timeline.css";
 import React, { useEffect, useRef, useState } from "react";
 
 const defaultDay1Events = [
