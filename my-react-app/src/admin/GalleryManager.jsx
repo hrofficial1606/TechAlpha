@@ -1,11 +1,23 @@
 import { useEffect, useState } from "react";
 import AdminLayout from "./AdminLayout";
 import CloudinaryUploadField from "./CloudinaryUploadField";
-import { addGalleryItem, deleteGalleryItem, getEvents, getGalleryItems } from "../services/eventService";
+import { addGalleryItem, deleteGalleryItem, getEvents, getGalleryItems, uploadAdminMedia } from "../services/eventService";
+
+function createGalleryTitle(fileName) {
+  return fileName
+    .replace(/\.[^.]+$/, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim() || "Gallery Photo";
+}
 
 function GalleryManager() {
   const [events, setEvents] = useState([]);
   const [gallery, setGallery] = useState([]);
+  const [bulkUpload, setBulkUpload] = useState({
+    eventId: "",
+    files: [],
+  });
   const [form, setForm] = useState({
     eventId: "",
     title: "",
@@ -16,6 +28,7 @@ function GalleryManager() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [deletingGalleryId, setDeletingGalleryId] = useState(null);
+  const [bulkUploading, setBulkUploading] = useState(false);
 
   const loadData = async () => {
     const [loadedEvents, loadedGallery] = await Promise.all([getEvents(), getGalleryItems()]);
@@ -32,6 +45,20 @@ function GalleryManager() {
   const handleChange = event => {
     const { name, value } = event.target;
     setForm(currentForm => ({ ...currentForm, [name]: value }));
+  };
+
+  const handleBulkChange = event => {
+    const { name, value, files } = event.target;
+
+    if (name === "files") {
+      setBulkUpload(current => ({
+        ...current,
+        files: Array.from(files || []).slice(0, 20),
+      }));
+      return;
+    }
+
+    setBulkUpload(current => ({ ...current, [name]: value }));
   };
 
   const submit = async event => {
@@ -73,6 +100,48 @@ function GalleryManager() {
     }
   };
 
+  const submitBulkUpload = async event => {
+    event.preventDefault();
+    setError("");
+    setMessage("");
+
+    if (!bulkUpload.files.length) {
+      setError("Choose at least one image to upload.");
+      return;
+    }
+
+    setBulkUploading(true);
+
+    try {
+      for (const file of bulkUpload.files) {
+        const uploadResponse = await uploadAdminMedia({
+          file,
+          folder: "techalfa/gallery",
+          resourceType: "image",
+        });
+
+        await addGalleryItem({
+          eventId: bulkUpload.eventId ? Number(bulkUpload.eventId) : null,
+          title: createGalleryTitle(file.name),
+          mediaType: "PHOTO",
+          mediaUrl: uploadResponse.url,
+          thumbnailUrl: "",
+        });
+      }
+
+      setMessage(`${bulkUpload.files.length} photo${bulkUpload.files.length > 1 ? "s" : ""} added to gallery.`);
+      setBulkUpload({
+        eventId: "",
+        files: [],
+      });
+      await loadData();
+    } catch (requestError) {
+      setError(requestError.response?.data?.message || "Unable to bulk upload gallery photos.");
+    } finally {
+      setBulkUploading(false);
+    }
+  };
+
   return (
     <AdminLayout
       title="Gallery Manager"
@@ -80,7 +149,69 @@ function GalleryManager() {
     >
       <section className="admin-grid admin-two-col">
         <div className="admin-form-card glass-admin">
+          <h3>Bulk Photo Upload</h3>
+          <p className="admin-help">
+            Select up to 20 photos at once. Each image will be uploaded and added to the gallery automatically.
+          </p>
+
+          <form className="admin-form" onSubmit={submitBulkUpload}>
+            <select name="eventId" value={bulkUpload.eventId} onChange={handleBulkChange}>
+              <option value="">No linked event</option>
+              {events.map(event => (
+                <option key={event.id} value={event.id}>
+                  {event.title}
+                </option>
+              ))}
+            </select>
+
+            <div className="admin-upload-card">
+              <div className="admin-upload-copy">
+                <strong>Gallery Photos</strong>
+                <span>
+                  {bulkUpload.files.length
+                    ? `${bulkUpload.files.length} file${bulkUpload.files.length > 1 ? "s" : ""} selected.`
+                    : "Choose up to 20 images to upload together."}
+                </span>
+              </div>
+
+              <label className="admin-upload-button">
+                {bulkUploading ? "Uploading..." : "Select Photos"}
+                <input
+                  type="file"
+                  name="files"
+                  accept="image/*"
+                  multiple
+                  onChange={handleBulkChange}
+                  disabled={bulkUploading}
+                  hidden
+                />
+              </label>
+
+              {bulkUpload.files.length ? (
+                <div className="admin-upload-file-list">
+                  {bulkUpload.files.map(file => (
+                    <span key={`${file.name}-${file.lastModified}`} className="admin-upload-file-pill">
+                      {file.name}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+
+            {message ? <p className="admin-feedback-success">{message}</p> : null}
+            {error ? <p className="admin-feedback-error">{error}</p> : null}
+
+            <button className="admin-button" type="submit" disabled={bulkUploading}>
+              {bulkUploading ? "Uploading Photos..." : "Upload Selected Photos"}
+            </button>
+          </form>
+        </div>
+
+        <div className="admin-form-card glass-admin">
           <h3>Add Gallery Item</h3>
+          <p className="admin-help">
+            Use this when you need a single custom photo or video entry with a manual title or thumbnail.
+          </p>
           <form className="admin-form" onSubmit={submit}>
             <select name="eventId" value={form.eventId} onChange={handleChange}>
               <option value="">No linked event</option>
