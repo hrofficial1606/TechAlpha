@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { verifyLoginOtp, verifyRegistrationOtp } from "../services/authService";
-import { clearPendingAuth, getPendingAuth, saveAuthSession } from "../utils/auth";
+import { verifyForgotPassword, verifyRegistrationOtp } from "../services/authService";
+import { clearPendingAuth, getPendingAuth } from "../utils/auth";
 import "../styles/Login.css";
 
 function VerifyOtp() {
@@ -16,6 +16,7 @@ function VerifyOtp() {
   const [form, setForm] = useState({
     email: pendingAuth?.email || "",
     otp: "",
+    newPassword: "",
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,12 +26,14 @@ function VerifyOtp() {
   }
 
   const heading =
-    pendingAuth.mode === "register" ? "Verify Registration OTP" : "Verify Login OTP";
+    pendingAuth.mode === "register"
+      ? "Verify Registration OTP"
+      : "Reset Your Password";
 
   const helperText =
     pendingAuth.mode === "register"
       ? "Enter the OTP sent to your email to finish registration."
-      : "Enter the OTP sent to your email to complete login.";
+      : "Enter the OTP from your email and choose a new password.";
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -56,10 +59,15 @@ function VerifyOtp() {
         return;
       }
 
-      const authResponse = await verifyLoginOtp(form);
-      saveAuthSession(authResponse);
+      await verifyForgotPassword(form);
       clearPendingAuth();
-      navigate(pendingAuth.redirectTo || "/dashboard", { replace: true });
+      navigate("/login", {
+        replace: true,
+        state: {
+          email: form.email,
+          message: "Password reset complete. Please login with your new password.",
+        },
+      });
     } catch (requestError) {
       setError(requestError.response?.data?.message || "Unable to verify OTP.");
     } finally {
@@ -95,6 +103,19 @@ function VerifyOtp() {
             required
           />
 
+          {pendingAuth.mode === "forgot-password" ? (
+            <input
+              className="login-input"
+              name="newPassword"
+              type="password"
+              placeholder="New password"
+              autoComplete="new-password"
+              value={form.newPassword}
+              onChange={handleChange}
+              required
+            />
+          ) : null}
+
           {error ? <p className="auth-error">{error}</p> : null}
 
           <button className="login-btn" type="submit" disabled={loading}>
@@ -103,7 +124,10 @@ function VerifyOtp() {
 
           <p className="login-register">
             Need to start again?
-            <Link className="register-link" to={pendingAuth.mode === "register" ? "/register" : "/login"}>
+            <Link
+              className="register-link"
+              to={pendingAuth.mode === "register" ? "/register" : "/forgot-password"}
+            >
               Back
             </Link>
           </p>

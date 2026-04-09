@@ -15,8 +15,13 @@ export async function initiateLogin(data) {
   return response.data;
 }
 
-export async function verifyLoginOtp(data) {
-  const response = await api.post("/auth/login/verify", data);
+export async function initiateForgotPassword(data) {
+  const response = await api.post("/auth/forgot-password/initiate", data);
+  return response.data;
+}
+
+export async function verifyForgotPassword(data) {
+  const response = await api.post("/auth/forgot-password/verify", data);
   return response.data;
 }
 

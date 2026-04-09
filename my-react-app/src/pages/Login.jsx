@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { initiateLogin } from "../services/authService";
-import { savePendingAuth } from "../utils/auth";
+import { saveAuthSession } from "../utils/auth";
 import "../styles/Login.css";
 
 function Login() {
@@ -29,18 +29,11 @@ function Login() {
     setError("");
 
     try {
-      await initiateLogin(form);
-
-      const pendingAuth = {
-        email: form.email,
-        mode: "login",
-        redirectTo,
-      };
-
-      savePendingAuth(pendingAuth);
-      navigate("/verify-otp", { state: pendingAuth });
+      const authResponse = await initiateLogin(form);
+      saveAuthSession(authResponse);
+      navigate(redirectTo, { replace: true });
     } catch (requestError) {
-      setError(requestError.response?.data?.message || "Unable to send login OTP.");
+      setError(requestError.response?.data?.message || "Unable to login right now.");
     } finally {
       setLoading(false);
     }
@@ -82,8 +75,15 @@ function Login() {
           {error ? <p className="auth-error">{error}</p> : null}
 
           <button className="login-btn" type="submit" disabled={loading}>
-            {loading ? "Sending OTP..." : "Send Login OTP"}
+            {loading ? "Logging in..." : "Login"}
           </button>
+
+          <p className="login-register">
+            Forgot your password?
+            <Link className="register-link" to="/forgot-password">
+              Reset it
+            </Link>
+          </p>
 
           <p className="login-register">
             New here?

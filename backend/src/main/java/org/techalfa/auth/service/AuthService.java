@@ -6,6 +6,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.techalfa.auth.dto.AuthTokenResponse;
+import org.techalfa.auth.dto.ForgotPasswordInitiateRequest;
+import org.techalfa.auth.dto.ForgotPasswordResetRequest;
 import org.techalfa.auth.dto.LoginInitiateRequest;
 import org.techalfa.auth.dto.OtpVerificationRequest;
 import org.techalfa.auth.dto.RegisterRequest;
@@ -42,6 +44,7 @@ public class AuthService {
 
         user.setFullName(request.fullName().trim());
         user.setEmail(normalizedEmail);
+        user.setMobileNumber(normalizeMobileNumber(request.mobileNumber()));
         user.setPasswordHash(passwordEncoder.encode(request.password()));
         user.setEmailVerified(false);
         user.setRoleName(resolveRoleForEmail(normalizedEmail));
@@ -64,7 +67,7 @@ public class AuthService {
     }
 
     @Transactional
-    public void initiateLogin(LoginInitiateRequest request) {
+    public AuthTokenResponse initiateLogin(LoginInitiateRequest request) {
         UserAccount user = findUser(request.email());
         if (!user.isEmailVerified()) {
             throw new BadCredentialsException("Please verify your email first.");
@@ -73,18 +76,6 @@ public class AuthService {
             throw new BadCredentialsException("Invalid email or password.");
         }
 
-        UserOtp otp = otpService.createOtp(user, OtpPurpose.LOGIN);
-        mailService.sendOtpEmail(user.getEmail(), user.getFullName(), otp.getOtpCode(), OtpPurpose.LOGIN);
-    }
-
-    @Transactional
-    public AuthTokenResponse verifyLoginOtp(OtpVerificationRequest request) {
-        UserAccount user = findUser(request.email());
-        if (!user.isEmailVerified()) {
-            throw new BadCredentialsException("Please verify your email first.");
-        }
-
-        otpService.validateOtp(user, request.otp(), OtpPurpose.LOGIN);
         AuthenticatedUser authenticatedUser = new AuthenticatedUser(user);
         String token = jwtService.generateToken(authenticatedUser);
 
@@ -92,8 +83,33 @@ public class AuthService {
                 token,
                 "Bearer",
                 jwtService.getExpirationMinutes(),
-                new UserProfileResponse(user.getId(), user.getFullName(), user.getEmail(), user.isEmailVerified())
+                new UserProfileResponse(
+                        user.getId(),
+                        user.getFullName(),
+                        user.getEmail(),
+                        user.getMobileNumber(),
+                        user.isEmailVerified()
+                )
         );
+    }
+
+    @Transactional
+    public void initiatePasswordReset(ForgotPasswordInitiateRequest request) {
+        UserAccount user = findUser(request.email());
+        if (!user.isEmailVerified()) {
+            throw new BadCredentialsException("Please verify your email first.");
+        }
+
+        UserOtp otp = otpService.createOtp(user, OtpPurpose.PASSWORD_RESET);
+        mailService.sendOtpEmail(user.getEmail(), user.getFullName(), otp.getOtpCode(), OtpPurpose.PASSWORD_RESET);
+    }
+
+    @Transactional
+    public void resetPassword(ForgotPasswordResetRequest request) {
+        UserAccount user = findUser(request.email());
+        otpService.validateOtp(user, request.otp(), OtpPurpose.PASSWORD_RESET);
+        user.setPasswordHash(passwordEncoder.encode(request.newPassword()));
+        userAccountRepository.save(user);
     }
 
     private UserAccount findUser(String email) {
@@ -107,5 +123,9 @@ public class AuthService {
             return RoleName.ADMIN;
         }
         return RoleName.USER;
+    }
+
+    private String normalizeMobileNumber(String mobileNumber) {
+        return mobileNumber == null ? null : mobileNumber.replaceAll("\\s+", "").trim();
     }
 }

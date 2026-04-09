@@ -13,6 +13,7 @@ import Accommodation from "./pages/Accommodation";
 import Contact from "./pages/Contact";
 import Dev from "./pages/Dev";
 import Gallery from "./pages/Gallery";
+import ForgotPassword from "./pages/ForgotPassword";
 import Hackathon from "./pages/Hackathon";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -46,6 +47,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/acm" element={<Accommodation />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/payment/success" element={<ProtectedRoute><PaymentSuccess /></ProtectedRoute>} />
         <Route path="/payment/cancel" element={<PaymentCancel />} />

@@ -28,7 +28,7 @@ public class MailService {
         message.setTo(toEmail);
         message.setSubject(purpose == OtpPurpose.REGISTRATION
                 ? "Techalfa registration OTP"
-                : "Techalfa login OTP");
+                : "Techalfa password reset OTP");
         message.setText(buildMessage(fullName, otp, purpose));
 
         try {
@@ -42,7 +42,9 @@ public class MailService {
     }
 
     private String buildMessage(String fullName, String otp, OtpPurpose purpose) {
-        String action = purpose == OtpPurpose.REGISTRATION ? "complete your registration" : "complete your login";
+        String action = purpose == OtpPurpose.REGISTRATION
+                ? "complete your registration"
+                : "reset your password";
         return """
                 Hello %s,
 

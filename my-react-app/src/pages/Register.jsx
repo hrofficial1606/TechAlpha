@@ -10,6 +10,7 @@ function Register() {
   const [form, setForm] = useState({
     fullName: "",
     email: "",
+    mobileNumber: "",
     password: "",
   });
   const [error, setError] = useState("");
@@ -49,7 +50,7 @@ function Register() {
           <h2 className="register-title">Create Your Account</h2>
 
           <p className="auth-subtitle">
-            Register once, verify your email OTP, and then login whenever you use a protected action.
+            Register once with your email and mobile number, verify your email OTP, and then login directly with your password.
           </p>
 
           <input
@@ -70,6 +71,17 @@ function Register() {
             placeholder="Email"
             autoComplete="email"
             value={form.email}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            className="register-input"
+            name="mobileNumber"
+            type="tel"
+            placeholder="Mobile number"
+            autoComplete="tel"
+            value={form.mobileNumber}
             onChange={handleChange}
             required
           />

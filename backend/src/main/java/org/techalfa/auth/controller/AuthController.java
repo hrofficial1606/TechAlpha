@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.techalfa.auth.dto.ApiResponse;
 import org.techalfa.auth.dto.AuthTokenResponse;
+import org.techalfa.auth.dto.ForgotPasswordInitiateRequest;
+import org.techalfa.auth.dto.ForgotPasswordResetRequest;
 import org.techalfa.auth.dto.LoginInitiateRequest;
 import org.techalfa.auth.dto.OtpVerificationRequest;
 import org.techalfa.auth.dto.RegisterRequest;
@@ -36,13 +38,19 @@ public class AuthController {
     }
 
     @PostMapping("/login/initiate")
-    public ResponseEntity<ApiResponse> initiateLogin(@Valid @RequestBody LoginInitiateRequest request) {
-        authService.initiateLogin(request);
-        return ResponseEntity.ok(new ApiResponse("Login OTP sent to your email."));
+    public ResponseEntity<AuthTokenResponse> initiateLogin(@Valid @RequestBody LoginInitiateRequest request) {
+        return ResponseEntity.ok(authService.initiateLogin(request));
     }
 
-    @PostMapping("/login/verify")
-    public ResponseEntity<AuthTokenResponse> verifyLogin(@Valid @RequestBody OtpVerificationRequest request) {
-        return ResponseEntity.ok(authService.verifyLoginOtp(request));
+    @PostMapping("/forgot-password/initiate")
+    public ResponseEntity<ApiResponse> initiateForgotPassword(@Valid @RequestBody ForgotPasswordInitiateRequest request) {
+        authService.initiatePasswordReset(request);
+        return ResponseEntity.ok(new ApiResponse("Password reset OTP sent to your email."));
+    }
+
+    @PostMapping("/forgot-password/verify")
+    public ResponseEntity<ApiResponse> verifyForgotPassword(@Valid @RequestBody ForgotPasswordResetRequest request) {
+        authService.resetPassword(request);
+        return ResponseEntity.ok(new ApiResponse("Password updated successfully. Please login with your new password."));
     }
 }

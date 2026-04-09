@@ -17,13 +17,25 @@ public class UserAccountService {
 
     public UserProfileResponse getProfile(String email) {
         UserAccount user = findUser(email);
-        return new UserProfileResponse(user.getId(), user.getFullName(), user.getEmail(), user.isEmailVerified());
+        return new UserProfileResponse(
+                user.getId(),
+                user.getFullName(),
+                user.getEmail(),
+                user.getMobileNumber(),
+                user.isEmailVerified()
+        );
     }
 
     public UserDashboardResponse getDashboard(String email) {
         UserAccount user = findUser(email);
         return new UserDashboardResponse(
-                new UserProfileResponse(user.getId(), user.getFullName(), user.getEmail(), user.isEmailVerified()),
+                new UserProfileResponse(
+                        user.getId(),
+                        user.getFullName(),
+                        user.getEmail(),
+                        user.getMobileNumber(),
+                        user.isEmailVerified()
+                ),
                 registrationService.getUserRegistrations(email),
                 registrationService.getCertificates(email),
                 notificationService.getUserNotifications(user),
