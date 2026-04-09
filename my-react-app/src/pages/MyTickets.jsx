@@ -6,37 +6,52 @@ import RightSideMenu from "../components/RightSideMenu";
 import { getUserDashboard, getQrImageUrl } from "../services/ticketService";
 import { clearAuthSession, clearPendingAuth, getStoredUser, updateStoredUser } from "../utils/auth";
 import "../styles/FeaturePages.css";
+import deadCoderAvatar from "../assets/avatar-dead-coder.jpg";
+import urbanTrackerAvatar from "../assets/avatar-urban-tracker.jpg";
+import nightDriftAvatar from "../assets/avatar-night-drift.jpg";
+import warSmileAvatar from "../assets/avatar-war-smile.jpg";
+import neonScoutAvatar from "../assets/avatar-neon-scout.jpg";
+import angelOfDeathAvatar from "../assets/avatar-angel-of-death.jpg";
+import resistanceAvatar from "../assets/avatar-resistance.jpg";
+import protonAvatar from "../assets/avatar-proton.jpg";
+import frogmanAvatar from "../assets/avatar-frogman.jpg";
 
 const avatarOptions = [
   {
-    name: "Ghost",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80",
+    name: "Dead Coder",
+    image: deadCoderAvatar,
   },
   {
-    name: "Wraith",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+    name: "Urban Tracker",
+    image: urbanTrackerAvatar,
   },
   {
-    name: "Viper",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+    name: "Night Drift",
+    image: nightDriftAvatar,
   },
   {
-    name: "Ranger",
-    image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80",
+    name: "War Smile",
+    image: warSmileAvatar,
   },
   {
-    name: "Nova",
-    image:
-      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=400&q=80",
+    name: "Neon Scout",
+    image: neonScoutAvatar,
   },
   {
-    name: "Sentinel",
-    image:
-      "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=400&q=80",
+    name: "Angel Of Death",
+    image: angelOfDeathAvatar,
+  },
+  {
+    name: "The Resistance",
+    image: resistanceAvatar,
+  },
+  {
+    name: "Proton Core",
+    image: protonAvatar,
+  },
+  {
+    name: "Frogman",
+    image: frogmanAvatar,
   },
 ];
 
@@ -109,8 +124,10 @@ function MyTickets() {
                       type="button"
                       onClick={() => handleAvatarSelect(avatarUrl)}
                       title={option.name}
+                      aria-label={option.name}
                     >
                       <img src={avatarUrl} alt={option.name} className="profile-avatar-option-image" />
+                      <span className="profile-avatar-option-label">{option.name}</span>
                     </button>
                   );
                 })}

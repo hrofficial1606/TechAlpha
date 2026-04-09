@@ -75,3 +75,18 @@
   color:#70f0b0;
   font-size:0.92rem;
 }
+
+@media (max-width: 768px){
+  .login-wrapper{
+    min-height: calc(100vh - 60px);
+    height: auto;
+    align-items: flex-start;
+    padding: 96px 14px 90px;
+  }
+
+  .login-card{
+    width: min(100%, 420px);
+    padding: 28px 18px;
+    gap: 16px;
+  }
+}

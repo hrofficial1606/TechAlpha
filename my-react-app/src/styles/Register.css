@@ -61,3 +61,18 @@
   cursor:pointer;
   text-decoration:none;
 }
+
+@media (max-width: 768px){
+  .register-wrapper{
+    min-height: calc(100vh - 60px);
+    height: auto;
+    align-items: flex-start;
+    padding: 96px 14px 90px;
+  }
+
+  .register-card{
+    width: min(100%, 420px);
+    padding: 28px 18px;
+    gap: 16px;
+  }
+}
