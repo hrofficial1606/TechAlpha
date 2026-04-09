@@ -5,6 +5,7 @@ public record UserProfileResponse(
         String fullName,
         String email,
         String mobileNumber,
-        boolean verified
+        boolean verified,
+        String roleName
 ) {
 }

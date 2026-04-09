@@ -88,7 +88,8 @@ public class AuthService {
                         user.getFullName(),
                         user.getEmail(),
                         user.getMobileNumber(),
-                        user.isEmailVerified()
+                        user.isEmailVerified(),
+                        user.getRoleName().name()
                 )
         );
     }

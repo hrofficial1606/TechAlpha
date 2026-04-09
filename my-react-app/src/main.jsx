@@ -53,10 +53,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/payment/cancel" element={<PaymentCancel />} />
         <Route path="/profile" element={<ProtectedRoute><MyTickets /></ProtectedRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><MyTickets /></ProtectedRoute>} />
-        <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-        <Route path="/admin/events" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
-        <Route path="/admin/gallery" element={<ProtectedRoute><GalleryManager /></ProtectedRoute>} />
-        <Route path="/admin/hackathon" element={<ProtectedRoute><EditHackathonContent /></ProtectedRoute>} />
+        <Route path="/admin" element={<ProtectedRoute requireAdmin><AdminDashboard /></ProtectedRoute>} />
+        <Route path="/admin/events" element={<ProtectedRoute requireAdmin><CreateEvent /></ProtectedRoute>} />
+        <Route path="/admin/gallery" element={<ProtectedRoute requireAdmin><GalleryManager /></ProtectedRoute>} />
+        <Route path="/admin/hackathon" element={<ProtectedRoute requireAdmin><EditHackathonContent /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

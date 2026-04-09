@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import SideMenu from "../components/SideMenu";
 import RightSideMenu from "../components/RightSideMenu";
@@ -60,12 +60,16 @@ function MyTickets() {
   const [error, setError] = useState("");
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const navigate = useNavigate();
+  const storedUser = getStoredUser();
+
+  if (storedUser?.roleName === "ADMIN") {
+    return <Navigate to="/admin" replace />;
+  }
 
   useEffect(() => {
     const loadDashboard = async () => {
       try {
         setDashboard(await getUserDashboard());
-        const storedUser = getStoredUser();
         setSelectedAvatar(storedUser?.profileImage || avatarOptions[0].image);
       } catch (requestError) {
         setError(requestError.response?.data?.message || "Unable to load your profile.");
@@ -73,7 +77,7 @@ function MyTickets() {
     };
 
     loadDashboard();
-  }, []);
+  }, [storedUser]);
 
   const handleLogout = () => {
     clearAuthSession();

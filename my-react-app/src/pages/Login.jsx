@@ -16,8 +16,6 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const successMessage = location.state?.message || "";
 
-  const redirectTo = location.state?.from?.pathname || "/dashboard";
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm((currentForm) => ({ ...currentForm, [name]: value }));
@@ -31,6 +29,13 @@ function Login() {
     try {
       const authResponse = await initiateLogin(form);
       saveAuthSession(authResponse);
+      const requestedPath = location.state?.from?.pathname;
+      const isAdmin = authResponse.user?.roleName === "ADMIN";
+      const adminBlockedUserPages = new Set(["/profile", "/dashboard"]);
+      const redirectTo = isAdmin
+        ? (requestedPath && !adminBlockedUserPages.has(requestedPath) ? requestedPath : "/admin")
+        : (requestedPath || "/dashboard");
+
       navigate(redirectTo, { replace: true });
     } catch (requestError) {
       setError(requestError.response?.data?.message || "Unable to login right now.");

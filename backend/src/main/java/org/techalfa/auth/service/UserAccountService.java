@@ -22,7 +22,8 @@ public class UserAccountService {
                 user.getFullName(),
                 user.getEmail(),
                 user.getMobileNumber(),
-                user.isEmailVerified()
+                user.isEmailVerified(),
+                user.getRoleName().name()
         );
     }
 
@@ -34,7 +35,8 @@ public class UserAccountService {
                         user.getFullName(),
                         user.getEmail(),
                         user.getMobileNumber(),
-                        user.isEmailVerified()
+                        user.isEmailVerified(),
+                        user.getRoleName().name()
                 ),
                 registrationService.getUserRegistrations(email),
                 registrationService.getCertificates(email),

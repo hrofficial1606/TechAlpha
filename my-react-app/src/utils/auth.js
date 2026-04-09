@@ -46,6 +46,10 @@ export function getStoredUser() {
   }
 }
 
+export function isAdminUser(user = getStoredUser()) {
+  return user?.roleName === "ADMIN";
+}
+
 export function savePendingAuth(data) {
   localStorage.setItem(PENDING_AUTH_KEY, JSON.stringify(data));
 }
